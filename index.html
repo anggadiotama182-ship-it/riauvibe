@@ -95,7 +95,7 @@
 
             <!-- Right: Fast Actions, Dark Mode & Bookmarks -->
             <div class="flex items-center gap-2 sm:gap-3">
-                <button id="openCmsStudioBtn" class="flex items-center gap-1.5 text-amber-200 hover:text-white transition-all bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-500 hover:to-red-500 px-3 py-1 rounded-full font-bold shadow-sm text-xs" title="Buka CMS Editor Berita & Kelola Iklan">
+                <button id="openCmsStudioBtn" onclick="window.open('https://z0v67ol7.sanity.studio', '_blank')" class="flex items-center gap-1.5 text-amber-200 hover:text-white transition-all bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-500 hover:to-red-500 px-3 py-1 rounded-full font-bold shadow-sm text-xs" title="Buka CMS Editor Berita & Kelola Iklan">
                     <i class="fas fa-feather-pointed text-[11px] text-amber-200"></i>
                     <span>Studio Redaksi & Iklan</span>
                 </button>
@@ -108,7 +108,7 @@
                     <span class="hidden sm:inline">Tersimpan</span>
                     <span class="bookmark-count-badge bg-red-600 text-white font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
                 </button>
-                <button id="themeToggleBtn" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 transition-colors" title="Ubah Tema Gelap / Terang">
+                <button id="themeToggleBtn" onclick="document.documentElement.classList.toggle('dark')" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 transition-colors" title="Ubah Tema Gelap / Terang">
                     <i class="fas fa-moon text-xs"></i>
                 </button>
             </div>
@@ -170,7 +170,7 @@
                 <i class="fas fa-bolt text-amber-300"></i> Kilas Kilat
             </span>
             <div class="ticker-wrapper flex-grow overflow-hidden relative">
-                <div id="breakingTickerList" class="ticker-track"></div>
+                <div id="breakingTickerList" class="ticker-track text-xs text-red-900 dark:text-red-200 font-medium">Berita terbaru Riau dan Kepulauan Riau diperbarui secara otomatis.</div>
             </div>
         </div>
     </div>
@@ -200,7 +200,7 @@
                     </div>
                 </div>
 
-                <!-- Kontainer Daftar Berita Utama -->
+                <!-- Kontainer Utama Tempat Kartu Berita Ditampilkan -->
                 <div id="newsFeedList" class="flex flex-col gap-4"></div>
 
                 <div class="text-center pt-4">
@@ -237,14 +237,14 @@
         </div>
     </footer>
 
-    <!-- Script Pengambil Data Sanity Live -->
-    <script type="module">
+    <!-- Script Pengambil Data Sanity & Rendering Kartu Berita -->
+    <script>
       const PROJECT_ID = 'z0v67ol7';
       const DATASET = 'production';
 
-      // Fungsi utama pengambil berita dari Sanity
       async function loadBeritaSanity() {
         const container = document.getElementById('newsFeedList');
+        const popularContainer = document.getElementById('popularNewsContainer');
         const badge = document.getElementById('newsCountBadge');
 
         const query = encodeURIComponent(`*[_type == "post"] | order(publishedAt desc){
@@ -266,24 +266,28 @@
           console.log("Data Berita Sanity Live:", articles);
 
           if (badge) badge.innerText = `${articles.length} Berita`;
-          if (!container) return;
+
+          if (!container) {
+            console.error("Elemen #newsFeedList tidak ditemukan!");
+            return;
+          }
 
           if (articles.length === 0) {
             container.innerHTML = '<p class="text-slate-500 py-4">Belum ada berita diterbitkan.</p>';
             return;
           }
 
-          // Render Berita & Foto ke Halaman
+          // Render Kartu Berita Utama
           container.innerHTML = articles.map(item => `
             <article class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row gap-4 shadow-sm hover:shadow-md transition-shadow">
               ${item.imageUrl ? `
                 <img src="${item.imageUrl}" alt="${item.title}" class="w-full sm:w-48 h-32 object-cover rounded-lg flex-shrink-0" />
               ` : `
                 <div class="w-full sm:w-48 h-32 bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 flex-shrink-0">
-                  <i class="fas fa-image text-2xl"></i>
+                  <i class="fas fa-newspaper text-2xl"></i>
                 </div>
               `}
-              <div class="flex flex-col justify-between">
+              <div class="flex flex-col justify-between flex-grow">
                 <div>
                   <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1">
                     ${item.category || 'Pemerintahan'}
@@ -299,16 +303,34 @@
             </article>
           `).join('');
 
+          // Render Sidebar Berita Terpopuler (3 Teratas)
+          if (popularContainer) {
+            popularContainer.innerHTML = articles.slice(0, 3).map((item, idx) => `
+              <div class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0">
+                <span class="text-lg font-extrabold text-blue-900 dark:text-blue-400 w-5 text-center flex-shrink-0">${idx + 1}</span>
+                <div>
+                  <h5 class="text-xs font-bold text-gray-800 dark:text-gray-200 line-clamp-2 hover:text-blue-600 cursor-pointer">
+                    ${item.title}
+                  </h5>
+                  <span class="text-[10px] text-gray-400">${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</span>
+                </div>
+              </div>
+            `).join('');
+          }
+
         } catch (error) {
-          console.error("Gagal mengambil data dari Sanity:", error);
+          console.error("Gagal memuat berita Sanity:", error);
           if (badge) badge.innerText = "Error";
-          if (container) container.innerHTML = '<p class="text-red-500 py-4">Gagal memuat berita dari server Sanity.</p>';
+          if (container) container.innerHTML = '<p class="text-red-500 py-4">Gagal memuat berita dari Sanity CMS.</p>';
         }
       }
 
-      // Jalankan fungsi saat halaman siap
-      window.addEventListener('DOMContentLoaded', loadBeritaSanity);
-      loadBeritaSanity();
+      // Eksekusi saat DOM Siap
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadBeritaSanity);
+      } else {
+        loadBeritaSanity();
+      }
     </script>
 </body>
 </html>
