@@ -23,8 +23,8 @@
     <meta name="twitter:title" content="RiauVibe - Update Riau dan Kepulauan Riau" />
     <meta name="twitter:description" content="Portal berita terpercaya dan terkini menyajikan informasi seputar peristiwa, pemerintahan, ekonomi, olahraga, dan gaya hidup di Riau dan sekitarnya." />
 
-    <!-- Tailwind CSS CDN -->
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <!-- Tailwind CSS CDN (Format Link Diperbaiki) -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -45,8 +45,8 @@
         }
     </script>
 
-    <!-- FontAwesome 6 Icons -->
-    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css)">
+    <!-- FontAwesome 6 Icons (Format Link Diperbaiki) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Custom Application CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -54,11 +54,11 @@
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
-      "@context": "[https://schema.org](https://schema.org)",
+      "@context": "https://schema.org",
       "@type": "NewsMediaOrganization",
       "name": "RiauVibe",
-      "url": "[https://riauvibe.netlify.app](https://riauvibe.netlify.app)",
-      "logo": "[https://riauvibe.netlify.app/assets/logo.png](https://riauvibe.netlify.app/assets/logo.png)",
+      "url": "https://riauvibe.netlify.app",
+      "logo": "https://riauvibe.netlify.app/assets/logo.png",
       "description": "Portal berita independen dan terpercaya seputar Riau dan Kepulauan Riau.",
       "address": {
         "@type": "PostalAddress",
@@ -98,7 +98,7 @@
 
             <!-- Right: Fast Actions, Dark Mode & Bookmarks -->
             <div class="flex items-center gap-2 sm:gap-3">
-                <button id="openCmsStudioBtn" onclick="openCmsStudio()" class="flex items-center gap-1.5 text-amber-200 hover:text-white transition-all bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-500 hover:to-red-500 px-3 py-1 rounded-full font-bold shadow-sm text-xs" title="Buka CMS Editor Berita & Kelola Iklan">
+                <button id="openCmsStudioBtn" class="flex items-center gap-1.5 text-amber-200 hover:text-white transition-all bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-500 hover:to-red-500 px-3 py-1 rounded-full font-bold shadow-sm text-xs" title="Buka CMS Editor Berita & Kelola Iklan">
                     <i class="fas fa-feather-pointed text-[11px] text-amber-200"></i>
                     <span>Studio Redaksi & Iklan</span>
                 </button>
@@ -122,7 +122,7 @@
     <header class="bg-white dark:bg-slate-900 shadow-sm border-b border-gray-100 dark:border-slate-800 sticky top-0 lg:static z-30 transition-colors">
         <div class="container mx-auto px-4 py-3.5 md:py-5 flex flex-wrap justify-between items-center gap-4">
             <!-- Brand Logo -->
-            <a href="#" onclick="resetFilters(); return false;" class="flex-shrink-0 flex items-center gap-3 group">
+            <a href="#" class="flex-shrink-0 flex items-center gap-3 group">
                 <div class="w-11 h-11 rounded-xl bg-blue-900 group-hover:bg-blue-800 text-white flex items-center justify-center shadow-md transition-transform group-hover:scale-105">
                     <i class="fas fa-newspaper text-xl"></i>
                 </div>
@@ -203,6 +203,7 @@
                     </div>
                 </div>
 
+                <!-- Kontainer Daftar Berita Utama -->
                 <div id="newsFeedList" class="flex flex-col gap-4"></div>
 
                 <div class="text-center pt-4">
@@ -222,7 +223,7 @@
                         </h3>
                         <span class="text-[11px] font-semibold text-gray-400">24 Jam Terakhir</span>
                     </div>
-                    <div id="popularNewsContainer" class="flex flex-col"></div>
+                    <div id="popularNewsContainer" class="flex flex-col gap-3"></div>
                 </div>
             </aside>
         </div>
@@ -242,22 +243,19 @@
     <!-- Main Application Script -->
     <script src="js/app.js"></script>
 
-    <!-- ======================================================= -->
-    <!-- Integrasi Sanity CMS Client CDN                        -->
-    <!-- ======================================================= -->
-    <script src="[https://cdn.jsdelivr.net/npm/@sanity/client@6.15.0/dist/sanityClient.browser.mjs](https://cdn.jsdelivr.net/npm/@sanity/client@6.15.0/dist/sanityClient.browser.mjs)" type="module"></script>
+    <!-- Integrasi Live Sanity Client -->
     <script type="module">
-      import { createClient } from '[https://cdn.jsdelivr.net/npm/@sanity/client@6.15.0/dist/sanityClient.browser.mjs](https://cdn.jsdelivr.net/npm/@sanity/client@6.15.0/dist/sanityClient.browser.mjs)'
+      import { createClient } from 'https://cdn.jsdelivr.net/npm/@sanity/client@6.15.0/dist/sanityClient.browser.mjs'
 
-      // Inisialisasi Koneksi Sanity Studio
+      // Inisialisasi Koneksi Sanity
       const client = createClient({
         projectId: 'z0v67ol7',
         dataset: 'production',
-        useCdn: true,
+        useCdn: false, // Wajib false agar selalu ambil data live terbaru dari bot AI
         apiVersion: '2024-01-01',
       })
 
-      // Ambil & Tampilkan Data Berita dari Sanity
+      // Ambil & Render Data Berita dari Sanity ke Halaman
       async function loadBeritaSanity() {
         const query = `*[_type == "post"] | order(publishedAt desc){
           _id,
@@ -271,8 +269,48 @@
         try {
           const articles = await client.fetch(query)
           console.log("Data Berita dari Sanity:", articles)
+
+          const container = document.getElementById('newsFeedList')
+          const badge = document.getElementById('newsCountBadge')
+
+          if (badge) badge.innerText = `${articles.length} Berita`
+          if (!container) return
+
+          if (articles.length === 0) {
+            container.innerHTML = '<p class="text-slate-500 py-4">Belum ada berita diterbitkan.</p>'
+            return
+          }
+
+          // Generate HTML Kartu Berita beserta Foto dari Sanity
+          container.innerHTML = articles.map(item => `
+            <article class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row gap-4 shadow-sm hover:shadow-md transition-shadow">
+              ${item.imageUrl ? `
+                <img src="${item.imageUrl}" alt="${item.title}" class="w-full sm:w-48 h-32 object-cover rounded-lg flex-shrink-0" />
+              ` : `
+                <div class="w-full sm:w-48 h-32 bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 flex-shrink-0">
+                  <i class="fas fa-image text-2xl"></i>
+                </div>
+              `}
+              <div class="flex flex-col justify-between">
+                <div>
+                  <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1">
+                    ${item.category || 'Umum'}
+                  </span>
+                  <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white line-clamp-2 hover:text-blue-600 transition-colors">
+                    <a href="#">${item.title}</a>
+                  </h4>
+                </div>
+                <span class="text-xs text-gray-400 mt-2">
+                  <i class="far fa-clock mr-1"></i> ${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </span>
+              </div>
+            </article>
+          `).join('')
+
         } catch (error) {
           console.error("Gagal mengambil data dari Sanity:", error)
+          const badge = document.getElementById('newsCountBadge')
+          if (badge) badge.innerText = "Error"
         }
       }
 
