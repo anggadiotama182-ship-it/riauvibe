@@ -23,7 +23,7 @@
     <meta name="twitter:title" content="RiauVibe - Update Riau dan Kepulauan Riau" />
     <meta name="twitter:description" content="Portal berita terpercaya dan terkini menyajikan informasi seputar peristiwa, pemerintahan, ekonomi, olahraga, dan gaya hidup di Riau dan sekitarnya." />
 
-    <!-- Tailwind CSS CDN (Format Link Diperbaiki) -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -45,11 +45,8 @@
         }
     </script>
 
-    <!-- FontAwesome 6 Icons (Format Link Diperbaiki) -->
+    <!-- FontAwesome 6 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Custom Application CSS -->
-    <link rel="stylesheet" href="css/style.css">
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -57,8 +54,8 @@
       "@context": "https://schema.org",
       "@type": "NewsMediaOrganization",
       "name": "RiauVibe",
-      "url": "https://riauvibe.netlify.app",
-      "logo": "https://riauvibe.netlify.app/assets/logo.png",
+      "url": "https://riauvibe.vercel.app",
+      "logo": "https://riauvibe.vercel.app/assets/logo.png",
       "description": "Portal berita independen dan terpercaya seputar Riau dan Kepulauan Riau.",
       "address": {
         "@type": "PostalAddress",
@@ -240,48 +237,43 @@
         </div>
     </footer>
 
-    <!-- Main Application Script -->
-    <script src="js/app.js"></script>
-
-    <!-- Integrasi Live Sanity Client -->
+    <!-- Script Pengambil Data Sanity Live -->
     <script type="module">
-      import { createClient } from 'https://cdn.jsdelivr.net/npm/@sanity/client@6.15.0/dist/sanityClient.browser.mjs'
+      const PROJECT_ID = 'z0v67ol7';
+      const DATASET = 'production';
 
-      // Inisialisasi Koneksi Sanity
-      const client = createClient({
-        projectId: 'z0v67ol7',
-        dataset: 'production',
-        useCdn: false, // Wajib false agar selalu ambil data live terbaru dari bot AI
-        apiVersion: '2024-01-01',
-      })
-
-      // Ambil & Render Data Berita dari Sanity ke Halaman
+      // Fungsi utama pengambil berita dari Sanity
       async function loadBeritaSanity() {
-        const query = `*[_type == "post"] | order(publishedAt desc){
+        const container = document.getElementById('newsFeedList');
+        const badge = document.getElementById('newsCountBadge');
+
+        const query = encodeURIComponent(`*[_type == "post"] | order(publishedAt desc){
           _id,
           title,
           "slug": slug.current,
           category,
           publishedAt,
           "imageUrl": mainImage.asset->url
-        }`
+        }`);
+
+        const endpoint = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
 
         try {
-          const articles = await client.fetch(query)
-          console.log("Data Berita dari Sanity:", articles)
+          const response = await fetch(endpoint);
+          const data = await response.json();
+          const articles = data.result || [];
 
-          const container = document.getElementById('newsFeedList')
-          const badge = document.getElementById('newsCountBadge')
+          console.log("Data Berita Sanity Live:", articles);
 
-          if (badge) badge.innerText = `${articles.length} Berita`
-          if (!container) return
+          if (badge) badge.innerText = `${articles.length} Berita`;
+          if (!container) return;
 
           if (articles.length === 0) {
-            container.innerHTML = '<p class="text-slate-500 py-4">Belum ada berita diterbitkan.</p>'
-            return
+            container.innerHTML = '<p class="text-slate-500 py-4">Belum ada berita diterbitkan.</p>';
+            return;
           }
 
-          // Generate HTML Kartu Berita beserta Foto dari Sanity
+          // Render Berita & Foto ke Halaman
           container.innerHTML = articles.map(item => `
             <article class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row gap-4 shadow-sm hover:shadow-md transition-shadow">
               ${item.imageUrl ? `
@@ -294,7 +286,7 @@
               <div class="flex flex-col justify-between">
                 <div>
                   <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1">
-                    ${item.category || 'Umum'}
+                    ${item.category || 'Pemerintahan'}
                   </span>
                   <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white line-clamp-2 hover:text-blue-600 transition-colors">
                     <a href="#">${item.title}</a>
@@ -305,16 +297,18 @@
                 </span>
               </div>
             </article>
-          `).join('')
+          `).join('');
 
         } catch (error) {
-          console.error("Gagal mengambil data dari Sanity:", error)
-          const badge = document.getElementById('newsCountBadge')
-          if (badge) badge.innerText = "Error"
+          console.error("Gagal mengambil data dari Sanity:", error);
+          if (badge) badge.innerText = "Error";
+          if (container) container.innerHTML = '<p class="text-red-500 py-4">Gagal memuat berita dari server Sanity.</p>';
         }
       }
 
-      loadBeritaSanity()
+      // Jalankan fungsi saat halaman siap
+      window.addEventListener('DOMContentLoaded', loadBeritaSanity);
+      loadBeritaSanity();
     </script>
 </body>
 </html>
