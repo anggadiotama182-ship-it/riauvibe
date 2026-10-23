@@ -75,7 +75,7 @@
             <div class="flex items-center flex-wrap gap-4">
                 <span class="flex items-center gap-1.5 font-medium text-slate-200">
                     <i class="far fa-calendar-check text-blue-400"></i>
-                    <span id="currentDateText">Kamis, 15 Oktober 2026</span>
+                    <span id="currentDateText">Jumat, 23 Oktober 2026</span>
                 </span>
                 <span class="hidden sm:inline text-slate-600">|</span>
                 <!-- Regional Weather Widget -->
@@ -119,7 +119,7 @@
     <header class="bg-white dark:bg-slate-900 shadow-sm border-b border-gray-100 dark:border-slate-800 sticky top-0 lg:static z-30 transition-colors">
         <div class="container mx-auto px-4 py-3.5 md:py-5 flex flex-wrap justify-between items-center gap-4">
             <!-- Brand Logo -->
-            <a href="#" class="flex-shrink-0 flex items-center gap-3 group">
+            <a href="/" class="flex-shrink-0 flex items-center gap-3 group">
                 <div class="w-11 h-11 rounded-xl bg-blue-900 group-hover:bg-blue-800 text-white flex items-center justify-center shadow-md transition-transform group-hover:scale-105">
                     <i class="fas fa-newspaper text-xl"></i>
                 </div>
@@ -151,7 +151,7 @@
     <nav class="bg-blue-900 dark:bg-slate-950 text-white shadow-md w-full border-t border-blue-800 dark:border-slate-800 sticky top-14 lg:top-0 z-20">
         <div class="container mx-auto px-4">
             <ul id="desktopNavMenu" class="hidden lg:flex items-center overflow-x-auto whitespace-nowrap">
-                <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-semibold text-sm transition-colors bg-blue-800 text-white active-nav" data-category="Semua"><i class="fas fa-home mr-1.5 text-xs"></i> Beranda</a></li>
+                <li><a href="/" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-semibold text-sm transition-colors bg-blue-800 text-white active-nav" data-category="Semua"><i class="fas fa-home mr-1.5 text-xs"></i> Beranda</a></li>
                 <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Peristiwa">Peristiwa</a></li>
                 <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Pemerintahan">Pemerintahan</a></li>
                 <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Olahraga">Olahraga</a></li>
@@ -263,59 +263,63 @@
           const data = await response.json();
           const articles = data.result || [];
 
-          console.log("Data Berita Sanity Live:", articles);
-
           if (badge) badge.innerText = `${articles.length} Berita`;
 
-          if (!container) {
-            console.error("Elemen #newsFeedList tidak ditemukan!");
-            return;
-          }
+          if (!container) return;
 
           if (articles.length === 0) {
             container.innerHTML = '<p class="text-slate-500 py-4">Belum ada berita diterbitkan.</p>';
             return;
           }
 
-          // Render Kartu Berita Utama
-          container.innerHTML = articles.map(item => `
-            <article class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row gap-4 shadow-sm hover:shadow-md transition-shadow">
-              ${item.imageUrl ? `
-                <img src="${item.imageUrl}" alt="${item.title}" class="w-full sm:w-48 h-32 object-cover rounded-lg flex-shrink-0" />
-              ` : `
-                <div class="w-full sm:w-48 h-32 bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 flex-shrink-0">
-                  <i class="fas fa-newspaper text-2xl"></i>
+          // Render Kartu Berita Utama (Floating Responsif & Tautan Aktif)
+          container.innerHTML = articles.map(item => {
+            const articleUrl = item.slug ? `/berita.html?slug=${item.slug}` : `#`;
+            return `
+              <article class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm hover:shadow-md transition-all group">
+                <a href="${articleUrl}" class="w-full sm:w-48 h-36 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
+                  ${item.imageUrl ? `
+                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  ` : `
+                    <div class="w-full h-full flex items-center justify-center text-slate-400">
+                      <i class="fas fa-newspaper text-3xl"></i>
+                    </div>
+                  `}
+                </a>
+                <div class="flex flex-col justify-between flex-grow w-full">
+                  <div>
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1.5">
+                      ${item.category || 'Pemerintahan'}
+                    </span>
+                    <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 transition-colors">
+                      <a href="${articleUrl}">${item.title}</a>
+                    </h4>
+                  </div>
+                  <div class="flex items-center justify-between text-xs text-gray-400 mt-3 pt-2 border-t border-gray-100 dark:border-slate-800">
+                    <span><i class="far fa-clock mr-1"></i> ${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                    <a href="${articleUrl}" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Baca Selengkapnya &rarr;</a>
+                  </div>
                 </div>
-              `}
-              <div class="flex flex-col justify-between flex-grow">
-                <div>
-                  <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1">
-                    ${item.category || 'Pemerintahan'}
-                  </span>
-                  <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white line-clamp-2 hover:text-blue-600 transition-colors">
-                    <a href="#">${item.title}</a>
-                  </h4>
-                </div>
-                <span class="text-xs text-gray-400 mt-2">
-                  <i class="far fa-clock mr-1"></i> ${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                </span>
-              </div>
-            </article>
-          `).join('');
+              </article>
+            `;
+          }).join('');
 
-          // Render Sidebar Berita Terpopuler (3 Teratas)
+          // Render Sidebar Berita Terpopuler
           if (popularContainer) {
-            popularContainer.innerHTML = articles.slice(0, 3).map((item, idx) => `
-              <div class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0">
-                <span class="text-lg font-extrabold text-blue-900 dark:text-blue-400 w-5 text-center flex-shrink-0">${idx + 1}</span>
-                <div>
-                  <h5 class="text-xs font-bold text-gray-800 dark:text-gray-200 line-clamp-2 hover:text-blue-600 cursor-pointer">
-                    ${item.title}
-                  </h5>
-                  <span class="text-[10px] text-gray-400">${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</span>
+            popularContainer.innerHTML = articles.slice(0, 3).map((item, idx) => {
+              const articleUrl = item.slug ? `/berita.html?slug=${item.slug}` : `#`;
+              return `
+                <div class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0">
+                  <span class="text-lg font-extrabold text-blue-900 dark:text-blue-400 w-5 text-center flex-shrink-0">${idx + 1}</span>
+                  <div>
+                    <h5 class="text-xs font-bold text-gray-800 dark:text-gray-200 line-clamp-2 hover:text-blue-600 cursor-pointer">
+                      <a href="${articleUrl}">${item.title}</a>
+                    </h5>
+                    <span class="text-[10px] text-gray-400">${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</span>
+                  </div>
                 </div>
-              </div>
-            `).join('');
+              `;
+            }).join('');
           }
 
         } catch (error) {
@@ -325,7 +329,6 @@
         }
       }
 
-      // Eksekusi saat DOM Siap
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadBeritaSanity);
       } else {
