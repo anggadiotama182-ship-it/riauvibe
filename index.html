@@ -48,7 +48,7 @@
 
     <!-- 1. Top Utility Header Bar -->
     <div class="bg-slate-900 text-slate-300 border-b border-slate-800 text-xs py-2 px-4 transition-colors">
-        <div class="container mx-auto flex flex-wrap items-center justify-between gap-3">
+        <div class="container mx-auto flex flex-wrap items-center justify-between gap-3 max-w-6xl">
             <div class="flex items-center flex-wrap gap-4">
                 <span class="flex items-center gap-1.5 font-medium text-slate-200">
                     <i class="far fa-calendar-check text-blue-400"></i>
@@ -76,7 +76,7 @@
 
     <!-- 2. Main Brand Header -->
     <header class="bg-white dark:bg-slate-900 shadow-sm border-b border-gray-100 dark:border-slate-800 sticky top-0 z-20">
-        <div class="container mx-auto px-4 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="container mx-auto px-4 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4 max-w-6xl">
             <a href="#" onclick="filterCategory('Semua'); return false;" class="flex items-center gap-3">
                 <div class="w-11 h-11 rounded-xl bg-blue-900 text-white flex items-center justify-center shadow-md">
                     <i class="fas fa-newspaper text-xl"></i>
@@ -110,11 +110,11 @@
         </div>
     </header>
 
-    <!-- 3. Primary Navigation Bar (Navigasi Kategori Aktif) -->
+    <!-- 3. Primary Navigation Bar -->
     <nav class="bg-blue-900 dark:bg-slate-950 text-white shadow-md w-full border-t border-blue-800 dark:border-slate-800 sticky top-[68px] z-10">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 max-w-6xl">
             <ul id="categoryNav" class="flex items-center overflow-x-auto whitespace-nowrap text-xs sm:text-sm font-semibold">
-                <li><button onclick="filterCategory('Semua')" class="cat-btn px-4 py-3 bg-blue-800 text-white transition-colors" data-cat="Semua"><i class="fas fa-home mr-1"></i> Semua Beranda</button></li>
+                <li><button onclick="filterCategory('Semua')" class="cat-btn px-4 py-3 bg-blue-800 text-white transition-colors font-bold" data-cat="Semua"><i class="fas fa-home mr-1"></i> Semua Beranda</button></li>
                 <li><button onclick="filterCategory('Peristiwa')" class="cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors" data-cat="Peristiwa">Peristiwa</button></li>
                 <li><button onclick="filterCategory('Pemerintahan')" class="cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors" data-cat="Pemerintahan">Pemerintahan</button></li>
                 <li><button onclick="filterCategory('Olahraga')" class="cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors" data-cat="Olahraga">Olahraga</button></li>
@@ -127,7 +127,7 @@
 
     <!-- 4. Breaking News Banner -->
     <div class="bg-red-50 dark:bg-red-950/40 border-b border-red-200 dark:border-red-900/50 py-2 overflow-hidden">
-        <div class="container mx-auto px-4 flex items-center gap-3">
+        <div class="container mx-auto px-4 flex items-center gap-3 max-w-6xl">
             <span class="flex-shrink-0 bg-red-600 text-white font-extrabold text-[11px] uppercase tracking-wider px-2.5 py-1 rounded shadow-sm flex items-center gap-1.5">
                 <i class="fas fa-bolt text-amber-300"></i> Kilas Kilat
             </span>
@@ -290,19 +290,104 @@
         </div>
     </div>
 
-    <!-- FOOTER INFORMASI & KONTAK -->
-    <footer class="bg-slate-950 text-slate-300 border-t border-slate-800 mt-auto">
-        <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-            <div>
-                &copy; 2026 RiauVibe - Portal Berita Riau dan Kepulauan Riau.
+    <!-- FOOTER LENGKAP PROFESIONAL -->
+    <footer class="bg-slate-950 text-slate-300 border-t border-slate-800 mt-auto pt-12 pb-6">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+                
+                <!-- Kolom 1: Profil Brand & Sosmed -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-900 text-white flex items-center justify-center shadow-md">
+                            <i class="fas fa-newspaper text-lg"></i>
+                        </div>
+                        <h2 class="text-2xl font-extrabold tracking-tight text-white">
+                            Riau<span class="text-red-600">Vibe</span>
+                        </h2>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Portal berita independen dan terpercaya yang menyajikan informasi aktual, tajam, dan berimbang seputar peristiwa, pemerintahan, ekonomi, olahraga, dan budaya di Provinsi Riau dan Kepulauan Riau.
+                    </p>
+                    <div class="flex items-center gap-2 pt-2">
+                        <a href="#" class="w-8 h-8 rounded-full bg-slate-900 hover:bg-blue-600 flex items-center justify-center text-slate-400 hover:text-white transition-colors text-xs">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-slate-900 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-colors text-xs">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-slate-900 hover:bg-pink-600 flex items-center justify-center text-slate-400 hover:text-white transition-colors text-xs">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-slate-900 hover:bg-red-600 flex items-center justify-center text-slate-400 hover:text-white transition-colors text-xs">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Kolom 2: Kategori Berita -->
+                <div>
+                    <h3 class="text-sm font-extrabold text-white uppercase tracking-wider mb-4 border-l-2 border-red-600 pl-2">
+                        KATEGORI BERITA
+                    </h3>
+                    <ul class="space-y-2 text-xs text-slate-400 font-medium">
+                        <li><a href="#" onclick="filterCategory('Peristiwa'); return false;" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-angle-right text-[10px] text-slate-600"></i> Peristiwa Riau & Kepri</a></li>
+                        <li><a href="#" onclick="filterCategory('Pemerintahan'); return false;" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-angle-right text-[10px] text-slate-600"></i> Pemerintahan & Kebijakan</a></li>
+                        <li><a href="#" onclick="filterCategory('Olahraga'); return false;" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-angle-right text-[10px] text-slate-600"></i> Olahraga (PSPS & Lainnya)</a></li>
+                        <li><a href="#" onclick="filterCategory('Hukum'); return false;" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-angle-right text-[10px] text-slate-600"></i> Hukum & Kriminal</a></li>
+                        <li><a href="#" onclick="filterCategory('Opini'); return false;" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-angle-right text-[10px] text-slate-600"></i> Kolom Opini & Analisis</a></li>
+                        <li><a href="#" onclick="filterCategory('Ekonomi'); return false;" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-angle-right text-[10px] text-slate-600"></i> Berita Ekonomi & Bisnis</a></li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 3: Redaksi & Panduan -->
+                <div>
+                    <h3 class="text-sm font-extrabold text-white uppercase tracking-wider mb-4 border-l-2 border-red-600 pl-2">
+                        REDAKSI & PANDUAN
+                    </h3>
+                    <ul class="space-y-2 text-xs text-slate-400 font-medium">
+                        <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-info-circle text-[10px] text-slate-600"></i> Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-users text-[10px] text-slate-600"></i> Susunan Redaksi</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-shield-halved text-[10px] text-slate-600"></i> Pedoman Media Siber</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-lock text-[10px] text-slate-600"></i> Kebijakan Privasi</a></li>
+                        <li><a href="https://wa.me/6281999472573" target="_blank" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-bullhorn text-[10px] text-slate-600"></i> Pasang Iklan & Kemitraan</a></li>
+                        <li><a href="mailto:pekanbaruonlinego@gmail.com" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-envelope text-[10px] text-slate-600"></i> Kontak & Pengaduan</a></li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 4: Berlangganan Newsletter & Kontak -->
+                <div class="space-y-4">
+                    <h3 class="text-sm font-extrabold text-white uppercase tracking-wider mb-4 border-l-2 border-red-600 pl-2">
+                        BERLANGGANAN BERITA
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Dapatkan ringkasan berita pilihan Riau & Kepri setiap pagi langsung ke email Anda.
+                    </p>
+                    <form onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan!');" class="flex items-center gap-0 overflow-hidden rounded-xl border border-slate-800 bg-slate-900 focus-within:border-blue-600">
+                        <input type="email" placeholder="Alamat email Anda..." required class="w-full bg-transparent px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none">
+                        <button type="submit" class="bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-4 py-2 transition-colors">
+                            Kirim
+                        </button>
+                    </form>
+                    <div class="text-[11px] text-slate-400 space-y-1 pt-1">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-location-dot text-red-500 text-xs"></i>
+                            <span>Pekanbaru, Riau, Indonesia</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-whatsapp text-emerald-500 text-xs"></i>
+                            <a href="https://wa.me/6281999472573" target="_blank" class="hover:underline">081999472573</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="flex items-center gap-6">
-                <a href="mailto:pekanbaruonlinego@gmail.com" class="hover:text-white transition-colors">
-                    <i class="far fa-envelope mr-1 text-blue-400"></i> pekanbaruonlinego@gmail.com
-                </a>
-                <a href="https://wa.me/6281999472573" target="_blank" class="hover:text-white transition-colors">
-                    <i class="fab fa-whatsapp mr-1 text-emerald-400"></i> 081999472573
-                </a>
+
+            <!-- Copyright & Back to Top -->
+            <div class="border-t border-slate-900 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500">
+                <p>&copy; 2026 <strong class="text-slate-400">RiauVibe</strong> - Portal Berita Riau dan Kepulauan Riau. Hak cipta dilindungi undang-undang.</p>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-white transition-colors flex items-center gap-1">
+                    <span>Kembali ke Atas</span> <i class="fas fa-arrow-up text-[10px]"></i>
+                </button>
             </div>
         </div>
     </footer>
@@ -360,14 +445,12 @@
         }
       }
 
-      // FUNGSI UNTUK MERENDER DAFTAR ARTIKEL BERDASARKAN FILTER / SEARCH
       function renderArticles() {
         const container = document.getElementById('newsFeedList');
         const badge = document.getElementById('newsCountBadge');
         const searchKeyword = document.getElementById('searchInput').value.toLowerCase().trim();
         const resetBtn = document.getElementById('resetFilterBtn');
 
-        // Filter berdasarkan Kategori & Kata Kunci Pencarian
         let filtered = articlesData.filter(item => {
           const matchCategory = activeCategory === 'Semua' || (item.category && item.category.toLowerCase() === activeCategory.toLowerCase());
           const matchSearch = !searchKeyword || item.title.toLowerCase().includes(searchKeyword);
@@ -376,7 +459,6 @@
 
         if (badge) badge.innerText = `${filtered.length} Berita`;
 
-        // Tampilkan/Sembunyikan Tombol Reset Filter
         if (activeCategory !== 'Semua' || searchKeyword !== '') {
           resetBtn.classList.remove('hidden');
         } else {
@@ -449,15 +531,12 @@
         container.innerHTML = feedContent;
       }
 
-      // FUNGSI AKSI FILTER KATEGORI
       function filterCategory(categoryName) {
         activeCategory = categoryName;
 
-        // Ubah Judul Kategori
         const titleElem = document.getElementById('currentCategoryTitle');
         titleElem.innerText = categoryName === 'Semua' ? 'Berita Terbaru & Terkini' : `Kategori: ${categoryName}`;
 
-        // Update Tampilan Tombol Navigasi Kategori (Active Class)
         document.querySelectorAll('.cat-btn').forEach(btn => {
           if (btn.getAttribute('data-cat') === categoryName) {
             btn.className = 'cat-btn px-4 py-3 bg-blue-800 text-white transition-colors font-bold';
@@ -469,19 +548,16 @@
         renderArticles();
       }
 
-      // FUNGSI PENCARIAN REAL-TIME
       function handleSearch() {
         renderArticles();
       }
 
-      // RESET SEMUA FILTER & SEARCH
       function resetFilter() {
         activeCategory = 'Semua';
         document.getElementById('searchInput').value = '';
         filterCategory('Semua');
       }
 
-      // DENGAN ID ARTIKEL UNTUK MODAL
       function openModalById(id) {
         const article = articlesData.find(a => a._id === id);
         if (!article) return;
