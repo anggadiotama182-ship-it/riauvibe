@@ -7,21 +7,7 @@
     
     <!-- Platform & SEO Metadata -->
     <meta name="siteName" content="RiauVibe" />
-    <meta name="siteDescription" content="Portal berita terpercaya dan terkini menyajikan informasi seputar peristiwa, pemerintahan, ekonomi, olahraga, dan gaya hidup di Provinsi Riau dan Kepulauan Riau." />
     <meta name="description" content="Portal berita terpercaya dan terkini menyajikan informasi seputar peristiwa, pemerintahan, ekonomi, olahraga, dan gaya hidup di Provinsi Riau dan Kepulauan Riau." />
-    <meta name="keywords" content="RiauVibe, Berita Riau, Berita Pekanbaru, Kepulauan Riau, Batam, PSPS Riau, Pilkada Riau, Wisata Siak" />
-    <meta name="author" content="Redaksi RiauVibe" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="RiauVibe - Update Riau dan Kepulauan Riau" />
-    <meta property="og:description" content="Portal berita terpercaya dan terkini menyajikan informasi seputar peristiwa, pemerintahan, ekonomi, olahraga, dan gaya hidup di Riau dan sekitarnya." />
-    <meta property="og:site_name" content="RiauVibe" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="RiauVibe - Update Riau dan Kepulauan Riau" />
-    <meta name="twitter:description" content="Portal berita terpercaya dan terkini menyajikan informasi seputar peristiwa, pemerintahan, ekonomi, olahraga, dan gaya hidup di Riau dan sekitarnya." />
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -47,68 +33,52 @@
 
     <!-- FontAwesome 6 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "NewsMediaOrganization",
-      "name": "RiauVibe",
-      "url": "https://riauvibe.vercel.app",
-      "logo": "https://riauvibe.vercel.app/assets/logo.png",
-      "description": "Portal berita independen dan terpercaya seputar Riau dan Kepulauan Riau.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Pekanbaru",
-        "addressRegion": "Riau",
-        "addressCountry": "ID"
-      }
-    }
-    </script>
+    <style>
+        /* Backdrop Blur Smoothness */
+        .modal-backdrop {
+            background-color: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px);
+        }
+        /* Custom Scrollbar Modal Reader */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(241, 245, 249, 0.5);
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .dark .custom-scroll::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
 </head>
 <body class="bg-slate-50 dark:bg-[#0b1120] text-slate-800 dark:text-slate-100 antialiased flex flex-col min-h-screen">
 
     <!-- 1. Top Utility Header Bar -->
     <div class="bg-slate-900 text-slate-300 border-b border-slate-800 text-xs py-2 px-4 transition-colors">
         <div class="container mx-auto flex flex-wrap items-center justify-between gap-3">
-            <!-- Left: Indonesian Date & Weather Widget -->
             <div class="flex items-center flex-wrap gap-4">
                 <span class="flex items-center gap-1.5 font-medium text-slate-200">
                     <i class="far fa-calendar-check text-blue-400"></i>
                     <span id="currentDateText">Jumat, 23 Oktober 2026</span>
                 </span>
                 <span class="hidden sm:inline text-slate-600">|</span>
-                <!-- Regional Weather Widget -->
                 <div class="flex items-center gap-2">
-                    <i id="weatherIcon" class="fas fa-cloud-sun text-amber-400"></i>
-                    <span id="weatherTemp" class="font-bold text-white">31°C</span>
-                    <span id="weatherCond" class="hidden md:inline text-slate-300">Cerah Berawan</span>
-                    <select id="weatherCitySelect" class="bg-slate-800 border border-slate-700 text-slate-200 rounded px-1.5 py-0.5 text-[11px] focus:outline-none cursor-pointer">
-                        <option value="Pekanbaru" selected>Pekanbaru</option>
-                        <option value="Batam">Batam</option>
-                        <option value="Dumai">Dumai</option>
-                        <option value="Siak">Siak</option>
-                        <option value="Tanjungpinang">Tanjungpinang</option>
-                    </select>
+                    <i class="fas fa-cloud-sun text-amber-400"></i>
+                    <span class="font-bold text-white">31°C</span>
+                    <span class="hidden md:inline text-slate-300">Pekanbaru - Cerah Berawan</span>
                 </div>
             </div>
 
-            <!-- Right: Fast Actions, Dark Mode & Bookmarks -->
             <div class="flex items-center gap-2 sm:gap-3">
-                <button id="openCmsStudioBtn" onclick="window.open('https://z0v67ol7.sanity.studio', '_blank')" class="flex items-center gap-1.5 text-amber-200 hover:text-white transition-all bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-500 hover:to-red-500 px-3 py-1 rounded-full font-bold shadow-sm text-xs" title="Buka CMS Editor Berita & Kelola Iklan">
-                    <i class="fas fa-feather-pointed text-[11px] text-amber-200"></i>
+                <button onclick="window.open('https://z0v67ol7.sanity.studio', '_blank')" class="flex items-center gap-1.5 text-amber-200 hover:text-white transition-all bg-gradient-to-r from-amber-600 to-red-600 px-3 py-1 rounded-full font-bold shadow-sm text-xs">
+                    <i class="fas fa-feather-pointed text-[11px]"></i>
                     <span>Studio Redaksi & Iklan</span>
                 </button>
-                <button class="open-citizen-modal-btn hidden lg:flex items-center gap-1 text-slate-300 hover:text-white transition-colors bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded">
-                    <i class="fas fa-bullhorn text-red-400 text-[11px]"></i>
-                    <span>Kirim Berita Warga</span>
-                </button>
-                <button id="bookmarkDrawerBtn" class="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors px-2 py-1 rounded hover:bg-slate-800" title="Berita Tersimpan">
-                    <i class="far fa-bookmark text-blue-400"></i>
-                    <span class="hidden sm:inline">Tersimpan</span>
-                    <span class="bookmark-count-badge bg-red-600 text-white font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
-                </button>
-                <button id="themeToggleBtn" onclick="document.documentElement.classList.toggle('dark')" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 transition-colors" title="Ubah Tema Gelap / Terang">
+                <button onclick="document.documentElement.classList.toggle('dark')" class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 transition-colors">
                     <i class="fas fa-moon text-xs"></i>
                 </button>
             </div>
@@ -116,131 +86,186 @@
     </div>
 
     <!-- 2. Main Brand Header -->
-    <header class="bg-white dark:bg-slate-900 shadow-sm border-b border-gray-100 dark:border-slate-800 sticky top-0 lg:static z-30 transition-colors">
-        <div class="container mx-auto px-4 py-3.5 md:py-5 flex flex-wrap justify-between items-center gap-4">
-            <!-- Brand Logo -->
-            <a href="/" class="flex-shrink-0 flex items-center gap-3 group">
-                <div class="w-11 h-11 rounded-xl bg-blue-900 group-hover:bg-blue-800 text-white flex items-center justify-center shadow-md transition-transform group-hover:scale-105">
+    <header class="bg-white dark:bg-slate-900 shadow-sm border-b border-gray-100 dark:border-slate-800 sticky top-0 z-20">
+        <div class="container mx-auto px-4 py-3.5 flex justify-between items-center gap-4">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-blue-900 text-white flex items-center justify-center shadow-md">
                     <i class="fas fa-newspaper text-xl"></i>
                 </div>
                 <div class="flex flex-col">
-                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-blue-900 dark:text-blue-100 flex items-center">
+                    <h1 class="text-3xl font-extrabold tracking-tight text-blue-900 dark:text-blue-100">
                         Riau<span class="text-red-600">Vibe</span>
                     </h1>
-                    <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 tracking-wider">Update Riau dan Kepulauan Riau</span>
+                    <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">Update Riau dan Kepulauan Riau</span>
                 </div>
             </a>
-
-            <!-- Search & Mobile Hamburger -->
-            <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end flex-grow sm:flex-grow-0">
-                <div class="relative w-full sm:w-72 md:w-80">
-                    <input type="text" id="headerSearchInput" placeholder="Cari berita terkini Riau..." 
-                           class="w-full bg-gray-50 dark:bg-slate-800 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-blue-900 dark:focus:border-blue-500 focus:ring-1 focus:ring-blue-900 transition-all">
-                    <button class="absolute right-3.5 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-900 dark:hover:text-blue-400">
-                        <i class="fas fa-search text-sm"></i>
-                    </button>
-                </div>
-                <button id="mobileMenuBtn" class="lg:hidden p-2.5 rounded-lg border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 focus:outline-none text-lg">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
         </div>
     </header>
 
     <!-- 3. Primary Navigation Bar -->
-    <nav class="bg-blue-900 dark:bg-slate-950 text-white shadow-md w-full border-t border-blue-800 dark:border-slate-800 sticky top-14 lg:top-0 z-20">
+    <nav class="bg-blue-900 dark:bg-slate-950 text-white shadow-md w-full border-t border-blue-800 dark:border-slate-800">
         <div class="container mx-auto px-4">
-            <ul id="desktopNavMenu" class="hidden lg:flex items-center overflow-x-auto whitespace-nowrap">
-                <li><a href="/" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-semibold text-sm transition-colors bg-blue-800 text-white active-nav" data-category="Semua"><i class="fas fa-home mr-1.5 text-xs"></i> Beranda</a></li>
-                <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Peristiwa">Peristiwa</a></li>
-                <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Pemerintahan">Pemerintahan</a></li>
-                <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Olahraga">Olahraga</a></li>
-                <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Hukum">Hukum</a></li>
-                <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Opini">Opini</a></li>
-                <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Nasional">Nasional</a></li>
-                <li><a href="#" class="nav-cat-btn block px-4 py-3 hover:bg-blue-800 dark:hover:bg-slate-800 font-medium text-sm text-blue-100 transition-colors" data-category="Hiburan">Hiburan & Wisata</a></li>
+            <ul class="flex items-center overflow-x-auto whitespace-nowrap text-sm font-semibold">
+                <li><a href="#" class="block px-4 py-3 bg-blue-800 text-white"><i class="fas fa-home mr-1"></i> Beranda</a></li>
+                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Peristiwa</a></li>
+                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Pemerintahan</a></li>
+                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Olahraga</a></li>
+                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Hukum</a></li>
+                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Opini</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- 4. Breaking News Marquee Banner -->
-    <div class="bg-red-50 dark:bg-red-950/40 border-b border-red-200 dark:border-red-900/50 py-2 overflow-hidden">
-        <div class="container mx-auto px-4 flex items-center gap-3">
-            <span class="flex-shrink-0 bg-red-600 text-white font-extrabold text-[11px] uppercase tracking-wider px-2.5 py-1 rounded shadow-sm flex items-center gap-1.5">
-                <i class="fas fa-bolt text-amber-300"></i> Kilas Kilat
-            </span>
-            <div class="ticker-wrapper flex-grow overflow-hidden relative">
-                <div id="breakingTickerList" class="ticker-track text-xs text-red-900 dark:text-red-200 font-medium">Berita terbaru Riau dan Kepulauan Riau diperbarui secara otomatis.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. Main Content Area -->
-    <main class="container mx-auto px-4 py-4 md:py-6 flex-grow">
-        <section id="featuredHeadlineSection" class="mb-8"></section>
-
+    <!-- 4. Main Content Area -->
+    <main class="container mx-auto px-4 py-6 flex-grow max-w-6xl">
         <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Left Column: Berita Feed -->
+            <!-- Feed Berita Utama -->
             <section class="w-full lg:w-[70%] flex flex-col gap-6">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-2 border-gray-200 dark:border-slate-800 pb-3">
+                <div class="flex items-center justify-between border-b-2 border-gray-200 dark:border-slate-800 pb-3">
                     <div class="flex items-center gap-3">
-                        <h3 id="activeCategoryTitle" class="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white uppercase tracking-tight">
+                        <h3 class="text-xl font-extrabold text-gray-900 dark:text-white uppercase">
                             Berita Terbaru & Terkini
                         </h3>
                         <span id="newsCountBadge" class="bg-blue-100 dark:bg-blue-950 text-blue-900 dark:text-blue-300 font-bold text-xs px-2.5 py-1 rounded-full">
                             Memuat...
                         </span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <label for="newsSortSelect" class="text-xs text-gray-500 dark:text-gray-400 font-medium">Urutkan:</label>
-                        <select id="newsSortSelect" class="bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-800 dark:text-gray-200 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-900 cursor-pointer">
-                            <option value="latest">Waktu Terbaru</option>
-                            <option value="popular">Paling Populer</option>
-                        </select>
-                    </div>
                 </div>
 
-                <!-- Kontainer Utama Tempat Kartu Berita Ditampilkan -->
                 <div id="newsFeedList" class="flex flex-col gap-4"></div>
-
-                <div class="text-center pt-4">
-                    <button id="loadMoreBtn" class="px-6 py-2.5 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 border border-gray-300 dark:border-slate-700 text-gray-800 dark:text-gray-200 rounded-xl text-sm font-bold shadow-sm transition-all duration-200 inline-flex items-center gap-2">
-                        <span>Muat Berita Lainnya</span>
-                        <i class="fas fa-chevron-down text-xs text-gray-500"></i>
-                    </button>
-                </div>
             </section>
 
-            <!-- Right Column: Sidebar -->
+            <!-- Sidebar -->
             <aside class="w-full lg:w-[30%] flex flex-col gap-6">
-                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200/80 dark:border-slate-800 p-5">
-                    <div class="border-b-2 border-gray-200 dark:border-slate-800 mb-4 pb-2 flex items-center justify-between">
-                        <h3 class="text-base font-extrabold text-gray-900 dark:text-white uppercase tracking-wide flex items-center gap-2">
-                            <i class="fas fa-fire text-red-600"></i> Berita Terpopuler
-                        </h3>
-                        <span class="text-[11px] font-semibold text-gray-400">24 Jam Terakhir</span>
-                    </div>
+                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-800 p-5">
+                    <h3 class="text-base font-extrabold text-gray-900 dark:text-white uppercase border-b pb-2 mb-4">
+                        <i class="fas fa-fire text-red-600 mr-1.5"></i> Berita Terpopuler
+                    </h3>
                     <div id="popularNewsContainer" class="flex flex-col gap-3"></div>
                 </div>
             </aside>
         </div>
     </main>
 
+    <!-- ========================================================= -->
+    <!-- 5. FLOATING MODAL READER BERITA (PERSIS GAMBAR CONTOH)    -->
+    <!-- ========================================================= -->
+    <div id="articleModal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-3 md:p-6 transition-all duration-300">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl max-h-[90vh] rounded-3xl shadow-2xl border border-gray-100 dark:border-slate-800 flex flex-col overflow-hidden transform transition-transform duration-300 scale-95 opacity-0" id="modalContainer">
+            
+            <!-- Modal Floating Sticky Toolbar -->
+            <div class="sticky top-0 z-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-6 py-4 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <span id="modalCategory" class="bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-extrabold text-[11px] uppercase tracking-wider px-3 py-1 rounded-full">
+                        PEMERINTAHAN
+                    </span>
+                    <span class="text-slate-300 dark:text-slate-700">•</span>
+                    <span id="modalReadTime" class="text-xs text-slate-500 dark:text-slate-400 font-medium">4 menit baca</span>
+                </div>
+
+                <!-- Action Controls: Font Adjuster, Bookmark, Share & Close -->
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                    <div class="flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg p-0.5 text-xs font-semibold text-slate-600 dark:text-slate-300 mr-1">
+                        <button onclick="adjustFontSize(-1)" class="px-2 py-1 rounded hover:bg-white dark:hover:bg-slate-700 transition-colors" title="Kecilkan Teks">A-</button>
+                        <button onclick="resetFontSize()" class="px-2 py-1 rounded hover:bg-white dark:hover:bg-slate-700 transition-colors" title="Reset Ukuran">A</button>
+                        <button onclick="adjustFontSize(1)" class="px-2 py-1 rounded hover:bg-white dark:hover:bg-slate-700 transition-colors" title="Besarkan Teks">A+</button>
+                    </div>
+                    <button class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-colors">
+                        <i class="far fa-bookmark text-xs"></i>
+                    </button>
+                    <button class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-colors">
+                        <i class="fas fa-share-nodes text-xs"></i>
+                    </button>
+                    <button onclick="closeModal()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white flex items-center justify-center text-slate-600 dark:text-slate-300 transition-colors ml-1">
+                        <i class="fas fa-xmark text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Body Scrollable Container -->
+            <div class="p-6 md:p-8 overflow-y-auto custom-scroll flex-grow space-y-6">
+                <!-- Judul Utama -->
+                <h2 id="modalTitle" class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                    Loading...
+                </h2>
+
+                <!-- Foto Utama & Caption -->
+                <div id="modalImageWrapper" class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+                    <img id="modalImage" src="" alt="" class="w-full h-auto max-h-[400px] object-cover" />
+                    <p id="modalImageCaption" class="text-[11px] text-slate-400 dark:text-slate-500 p-2.5 bg-slate-50 dark:bg-slate-950/50 flex items-center gap-1.5">
+                        <i class="fas fa-camera"></i> <span id="captionText">Dokumentasi Liputan RiauVibe.</span>
+                    </p>
+                </div>
+
+                <!-- Ringkasan Utama Box (Callout Merah) -->
+                <div class="bg-blue-50/60 dark:bg-slate-800/50 border-l-4 border-red-600 rounded-r-2xl p-4 md:p-5">
+                    <span class="text-[11px] font-extrabold text-red-600 dark:text-red-400 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                        <i class="fas fa-bookmark"></i> RINGKASAN UTAMA
+                    </span>
+                    <p id="modalSummary" class="text-sm md:text-base font-semibold text-slate-800 dark:text-slate-200 italic leading-relaxed">
+                        Memuat ringkasan singkat...
+                    </p>
+                </div>
+
+                <!-- Isi Artikel Berita Lanjutan -->
+                <div id="modalBody" class="prose dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-base md:text-lg leading-relaxed space-y-4">
+                </div>
+
+                <hr class="border-slate-100 dark:border-slate-800 my-8">
+
+                <!-- 6. KOMPONEN TANGGAPAN PEMBACA (KOMENTAR) -->
+                <section class="space-y-6 pt-2">
+                    <h3 class="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="far fa-comments text-blue-600"></i> TANGGAPAN PEMBACA ( <span id="commentCount">2</span> )
+                    </h3>
+
+                    <!-- Form Tambah Tanggapan -->
+                    <form onsubmit="submitComment(event)" class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 md:p-5 border border-slate-200/80 dark:border-slate-800 space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="text" id="commentName" placeholder="Nama Anda..." required class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-blue-600">
+                            <input type="text" id="commentCity" placeholder="Kota / Asal (misal: Pekanbaru)..." required class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-blue-600">
+                        </div>
+                        <textarea id="commentText" rows="3" placeholder="Tulis tanggapan atau opini Anda secara santun..." required class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-blue-600"></textarea>
+                        <div class="flex justify-end">
+                            <button type="submit" class="px-5 py-2.5 bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 shadow-sm">
+                                <i class="fas fa-paper-plane text-[10px]"></i> Kirim Tanggapan
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Daftar Tanggapan Tampil -->
+                    <div id="commentsList" class="space-y-3">
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-800 flex items-start gap-3">
+                            <div class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold text-xs flex items-center justify-center flex-shrink-0">
+                                H
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h5 class="text-xs font-bold text-slate-800 dark:text-slate-200">Ir. Hendra Pratama <span class="text-slate-400 font-normal">(Dumai)</span></h5>
+                                    <span class="text-[10px] text-slate-400">21 Okt 2026</span>
+                                </div>
+                                <p class="text-xs text-slate-600 dark:text-slate-400">Perjalanan tol dan jaringan logistik regional sekarang jauh lebih efisien dan tertib.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-slate-950 text-slate-300 border-t border-slate-800 mt-auto">
-        <div class="container mx-auto px-4 py-12">
-            <div class="border-t border-slate-900 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-slate-500">
-                    &copy; 2026 RiauVibe - Portal Berita Riau dan Kepulauan Riau. Hak cipta dilindungi undang-undang.
-                </p>
-            </div>
+        <div class="container mx-auto px-4 py-8 text-center text-xs text-slate-500">
+            &copy; 2026 RiauVibe - Portal Berita Riau dan Kepulauan Riau.
         </div>
     </footer>
 
-    <!-- Script Pengambil Data Sanity & Rendering Kartu Berita -->
+    <!-- SCRIPT DATA SANITY & FLOATING MODAL LOGIC -->
     <script>
       const PROJECT_ID = 'z0v67ol7';
       const DATASET = 'production';
+      let articlesData = [];
+      let currentFontSize = 16;
 
       async function loadBeritaSanity() {
         const container = document.getElementById('newsFeedList');
@@ -253,7 +278,8 @@
           "slug": slug.current,
           category,
           publishedAt,
-          "imageUrl": mainImage.asset->url
+          "imageUrl": mainImage.asset->url,
+          body
         }`);
 
         const endpoint = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
@@ -261,73 +287,177 @@
         try {
           const response = await fetch(endpoint);
           const data = await response.json();
-          const articles = data.result || [];
+          articlesData = data.result || [];
 
-          if (badge) badge.innerText = `${articles.length} Berita`;
-
+          if (badge) badge.innerText = `${articlesData.length} Berita`;
           if (!container) return;
 
-          if (articles.length === 0) {
+          if (articlesData.length === 0) {
             container.innerHTML = '<p class="text-slate-500 py-4">Belum ada berita diterbitkan.</p>';
             return;
           }
 
-          // Render Kartu Berita Utama (Floating Responsif & Tautan Aktif)
-          container.innerHTML = articles.map(item => {
-            const articleUrl = item.slug ? `/berita.html?slug=${item.slug}` : `#`;
-            return `
-              <article class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm hover:shadow-md transition-all group">
-                <a href="${articleUrl}" class="w-full sm:w-48 h-36 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
-                  ${item.imageUrl ? `
-                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                  ` : `
-                    <div class="w-full h-full flex items-center justify-center text-slate-400">
-                      <i class="fas fa-newspaper text-3xl"></i>
-                    </div>
-                  `}
-                </a>
-                <div class="flex flex-col justify-between flex-grow w-full">
-                  <div>
-                    <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1.5">
-                      ${item.category || 'Pemerintahan'}
-                    </span>
-                    <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 transition-colors">
-                      <a href="${articleUrl}">${item.title}</a>
-                    </h4>
+          // Render List Kartu Berita Utama
+          container.innerHTML = articlesData.map((item, index) => `
+            <article onclick="openModal(${index})" class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+              <div class="w-full sm:w-48 h-36 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800">
+                ${item.imageUrl ? `
+                  <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                ` : `
+                  <div class="w-full h-full flex items-center justify-center text-slate-400">
+                    <i class="fas fa-newspaper text-3xl"></i>
                   </div>
-                  <div class="flex items-center justify-between text-xs text-gray-400 mt-3 pt-2 border-t border-gray-100 dark:border-slate-800">
-                    <span><i class="far fa-clock mr-1"></i> ${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
-                    <a href="${articleUrl}" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Baca Selengkapnya &rarr;</a>
-                  </div>
+                `}
+              </div>
+              <div class="flex flex-col justify-between flex-grow w-full">
+                <div>
+                  <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1.5">
+                    ${item.category || 'Pemerintahan'}
+                  </span>
+                  <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 transition-colors">
+                    ${item.title}
+                  </h4>
                 </div>
-              </article>
-            `;
-          }).join('');
+                <div class="flex items-center justify-between text-xs text-gray-400 mt-3 pt-2 border-t border-gray-100 dark:border-slate-800">
+                  <span><i class="far fa-clock mr-1"></i> ${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                  <span class="text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1">Baca Berita <i class="fas fa-expand text-[10px]"></i></span>
+                </div>
+              </div>
+            </article>
+          `).join('');
 
-          // Render Sidebar Berita Terpopuler
+          // Render Sidebar Populer
           if (popularContainer) {
-            popularContainer.innerHTML = articles.slice(0, 3).map((item, idx) => {
-              const articleUrl = item.slug ? `/berita.html?slug=${item.slug}` : `#`;
-              return `
-                <div class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0">
-                  <span class="text-lg font-extrabold text-blue-900 dark:text-blue-400 w-5 text-center flex-shrink-0">${idx + 1}</span>
-                  <div>
-                    <h5 class="text-xs font-bold text-gray-800 dark:text-gray-200 line-clamp-2 hover:text-blue-600 cursor-pointer">
-                      <a href="${articleUrl}">${item.title}</a>
-                    </h5>
-                    <span class="text-[10px] text-gray-400">${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</span>
-                  </div>
+            popularContainer.innerHTML = articlesData.slice(0, 3).map((item, idx) => `
+              <div onclick="openModal(${idx})" class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0 cursor-pointer group">
+                <span class="text-lg font-extrabold text-blue-900 dark:text-blue-400 w-5 text-center flex-shrink-0">${idx + 1}</span>
+                <div>
+                  <h5 class="text-xs font-bold text-gray-800 dark:text-gray-200 line-clamp-2 group-hover:text-blue-600">
+                    ${item.title}
+                  </h5>
+                  <span class="text-[10px] text-gray-400">${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</span>
                 </div>
-              `;
-            }).join('');
+              </div>
+            `).join('');
           }
 
         } catch (error) {
           console.error("Gagal memuat berita Sanity:", error);
-          if (badge) badge.innerText = "Error";
-          if (container) container.innerHTML = '<p class="text-red-500 py-4">Gagal memuat berita dari Sanity CMS.</p>';
         }
       }
+
+      // FUNGSI UNTUK MEMBUKA FLOATING MODAL
+      function openModal(index) {
+        const article = articlesData[index];
+        if (!article) return;
+
+        document.getElementById('modalCategory').innerText = article.category || 'PEMERINTAHAN';
+        document.getElementById('modalTitle').innerText = article.title;
+        document.getElementById('captionText').innerText = `Dokumentasi Liputan RiauVibe - ${article.title}`;
+
+        if (article.imageUrl) {
+          document.getElementById('modalImage').src = article.imageUrl;
+          document.getElementById('modalImageWrapper').classList.remove('hidden');
+        } else {
+          document.getElementById('modalImageWrapper').classList.add('hidden');
+        }
+
+        // Extract Teks Body Sanity
+        let fullText = [];
+        if (Array.isArray(article.body)) {
+          fullText = article.body.map(block => {
+            if (block._type === 'block' && block.children) {
+              return block.children.map(child => child.text).join('');
+            }
+            return '';
+          }).filter(Boolean);
+        }
+
+        // Set Ringkasan Utama
+        document.getElementById('modalSummary').innerText = fullText[0] || article.title;
+
+        // Set Paragraphs
+        const bodyContainer = document.getElementById('modalBody');
+        if (fullText.length > 1) {
+          bodyContainer.innerHTML = fullText.slice(1).map(p => `<p>${p}</p>`).join('');
+        } else {
+          bodyContainer.innerHTML = `<p>${fullText[0] || 'Isi artikel lengkap dari Sanity CMS.'}</p>`;
+        }
+
+        // Tampilkan Modal
+        const modal = document.getElementById('articleModal');
+        const container = document.getElementById('modalContainer');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        setTimeout(() => {
+          container.classList.remove('scale-95', 'opacity-0');
+          container.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      }
+
+      // FUNGSI UNTUK MENUTUP FLOATING MODAL
+      function closeModal() {
+        const modal = document.getElementById('articleModal');
+        const container = document.getElementById('modalContainer');
+
+        container.classList.remove('scale-100', 'opacity-100');
+        container.classList.add('scale-95', 'opacity-0');
+
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }, 200);
+      }
+
+      // KONTROL UKURAN TEKS
+      function adjustFontSize(delta) {
+        currentFontSize = Math.min(Math.max(currentFontSize + delta, 13), 22);
+        document.getElementById('modalBody').style.fontSize = `${currentFontSize}px`;
+      }
+
+      function resetFontSize() {
+        currentFontSize = 16;
+        document.getElementById('modalBody').style.fontSize = '16px';
+      }
+
+      // KONTROL TANGGAPAN / KOMENTAR
+      function submitComment(e) {
+        e.preventDefault();
+        const name = document.getElementById('commentName').value;
+        const city = document.getElementById('commentCity').value;
+        const text = document.getElementById('commentText').value;
+
+        const commentsList = document.getElementById('commentsList');
+        const newComment = `
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-800 flex items-start gap-3">
+              <div class="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 font-bold text-xs flex items-center justify-center flex-shrink-0">
+                  ${name.charAt(0).toUpperCase()}
+              </div>
+              <div class="flex-grow">
+                  <div class="flex items-center justify-between mb-1">
+                      <h5 class="text-xs font-bold text-slate-800 dark:text-slate-200">${name} <span class="text-slate-400 font-normal">(${city})</span></h5>
+                      <span class="text-[10px] text-slate-400">Baru saja</span>
+                  </div>
+                  <p class="text-xs text-slate-600 dark:text-slate-400">${text}</p>
+              </div>
+          </div>
+        `;
+        commentsList.insertAdjacentHTML('afterbegin', newComment);
+        
+        // Reset Form
+        document.getElementById('commentName').value = '';
+        document.getElementById('commentCity').value = '';
+        document.getElementById('commentText').value = '';
+
+        const countElem = document.getElementById('commentCount');
+        countElem.innerText = parseInt(countElem.innerText || '0') + 1;
+      }
+
+      // Close Modal On Backdrop Click
+      document.getElementById('articleModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+      });
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadBeritaSanity);
