@@ -9,9 +9,6 @@
     <meta name="siteName" content="RiauVibe" />
     <meta name="description" content="Portal berita terpercaya dan terkini menyajikan informasi seputar peristiwa, pemerintahan, ekonomi, olahraga, dan gaya hidup di Provinsi Riau dan Kepulauan Riau." />
 
-    <!-- Google AdSense Script (Hapus komentar di bawah ini & ganti client-id jika sudah disetujui AdSense) -->
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
-
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -79,8 +76,8 @@
 
     <!-- 2. Main Brand Header -->
     <header class="bg-white dark:bg-slate-900 shadow-sm border-b border-gray-100 dark:border-slate-800 sticky top-0 z-20">
-        <div class="container mx-auto px-4 py-3.5 flex justify-between items-center gap-4">
-            <a href="/" class="flex items-center gap-3">
+        <div class="container mx-auto px-4 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <a href="#" onclick="filterCategory('Semua'); return false;" class="flex items-center gap-3">
                 <div class="w-11 h-11 rounded-xl bg-blue-900 text-white flex items-center justify-center shadow-md">
                     <i class="fas fa-newspaper text-xl"></i>
                 </div>
@@ -91,9 +88,18 @@
                     <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">Update Riau dan Kepulauan Riau</span>
                 </div>
             </a>
+
+            <!-- Search Bar Real-Time -->
+            <div class="relative w-full sm:w-80">
+                <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="Cari berita terkini Riau..." 
+                       class="w-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-full py-2 pl-4 pr-10 text-xs focus:outline-none focus:border-blue-900 dark:focus:border-blue-500 transition-all">
+                <button class="absolute right-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-blue-900 dark:hover:text-blue-400">
+                    <i class="fas fa-search text-xs"></i>
+                </button>
+            </div>
             
             <!-- Kontak Cepat Header -->
-            <div class="hidden md:flex items-center gap-4 text-xs font-medium text-slate-600 dark:text-slate-300">
+            <div class="hidden lg:flex items-center gap-4 text-xs font-medium text-slate-600 dark:text-slate-300">
                 <a href="mailto:pekanbaruonlinego@gmail.com" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
                     <i class="far fa-envelope text-blue-600"></i> pekanbaruonlinego@gmail.com
                 </a>
@@ -104,16 +110,17 @@
         </div>
     </header>
 
-    <!-- 3. Primary Navigation Bar -->
-    <nav class="bg-blue-900 dark:bg-slate-950 text-white shadow-md w-full border-t border-blue-800 dark:border-slate-800">
+    <!-- 3. Primary Navigation Bar (Navigasi Kategori Aktif) -->
+    <nav class="bg-blue-900 dark:bg-slate-950 text-white shadow-md w-full border-t border-blue-800 dark:border-slate-800 sticky top-[68px] z-10">
         <div class="container mx-auto px-4">
-            <ul class="flex items-center overflow-x-auto whitespace-nowrap text-sm font-semibold">
-                <li><a href="#" class="block px-4 py-3 bg-blue-800 text-white"><i class="fas fa-home mr-1"></i> Beranda</a></li>
-                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Peristiwa</a></li>
-                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Pemerintahan</a></li>
-                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Olahraga</a></li>
-                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Hukum</a></li>
-                <li><a href="#" class="block px-4 py-3 hover:bg-blue-800 transition-colors">Opini</a></li>
+            <ul id="categoryNav" class="flex items-center overflow-x-auto whitespace-nowrap text-xs sm:text-sm font-semibold">
+                <li><button onclick="filterCategory('Semua')" class="cat-btn px-4 py-3 bg-blue-800 text-white transition-colors" data-cat="Semua"><i class="fas fa-home mr-1"></i> Semua Beranda</button></li>
+                <li><button onclick="filterCategory('Peristiwa')" class="cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors" data-cat="Peristiwa">Peristiwa</button></li>
+                <li><button onclick="filterCategory('Pemerintahan')" class="cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors" data-cat="Pemerintahan">Pemerintahan</button></li>
+                <li><button onclick="filterCategory('Olahraga')" class="cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors" data-cat="Olahraga">Olahraga</button></li>
+                <li><button onclick="filterCategory('Hukum')" class="cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors" data-cat="Hukum">Hukum</button></li>
+                <li><button onclick="filterCategory('Opini')" class="cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors" data-cat="Opini">Opini</button></li>
+                <li><button onclick="filterCategory('Ekonomi')" class="cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors" data-cat="Ekonomi">Ekonomi</button></li>
             </ul>
         </div>
     </nav>
@@ -131,11 +138,10 @@
     </div>
 
     <!-- BANNER IKLAN UTAMA ATAS -->
-    <div class="container mx-auto px-4 mt-4">
+    <div class="container mx-auto px-4 mt-4 max-w-6xl">
         <div class="bg-slate-100 dark:bg-slate-800/60 border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-3 text-center min-h-[90px] flex flex-col items-center justify-center overflow-hidden">
             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Ruang Iklan Sponsor / AdSense</span>
 
-            <!-- Iklan Banner Manual -->
             <a href="https://wa.me/6281999472573" target="_blank" class="block w-full max-w-2xl py-2 px-4 bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-xl shadow-sm hover:opacity-95 transition-opacity">
                 <div class="flex items-center justify-between gap-2">
                     <div class="text-left">
@@ -153,15 +159,18 @@
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Feed Berita Utama -->
             <section class="w-full lg:w-[70%] flex flex-col gap-6">
-                <div class="flex items-center justify-between border-b-2 border-gray-200 dark:border-slate-800 pb-3">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b-2 border-gray-200 dark:border-slate-800 pb-3">
                     <div class="flex items-center gap-3">
-                        <h3 class="text-xl font-extrabold text-gray-900 dark:text-white uppercase">
+                        <h3 id="currentCategoryTitle" class="text-xl font-extrabold text-gray-900 dark:text-white uppercase">
                             Berita Terbaru & Terkini
                         </h3>
                         <span id="newsCountBadge" class="bg-blue-100 dark:bg-blue-950 text-blue-900 dark:text-blue-300 font-bold text-xs px-2.5 py-1 rounded-full">
                             Memuat...
                         </span>
                     </div>
+                    <button id="resetFilterBtn" onclick="resetFilter()" class="hidden text-xs text-red-600 dark:text-red-400 font-bold hover:underline flex items-center gap-1">
+                        <i class="fas fa-rotate-left text-[10px]"></i> Reset Filter
+                    </button>
                 </div>
 
                 <div id="newsFeedList" class="flex flex-col gap-4"></div>
@@ -298,11 +307,12 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DATA SANITY & IN-FEED NATIVE ADS LOGIC -->
+    <!-- SCRIPT LOGIC FILTER KATEGORI, SEARCH & SANITY FETCH -->
     <script>
       const PROJECT_ID = 'z0v67ol7';
       const DATASET = 'production';
       let articlesData = [];
+      let activeCategory = 'Semua';
       let currentFontSize = 16;
 
       async function loadBeritaSanity() {
@@ -327,72 +337,13 @@
           const data = await response.json();
           articlesData = data.result || [];
 
-          if (badge) badge.innerText = `${articlesData.length} Berita`;
-          if (!container) return;
+          // Render Feed Berita Awal
+          renderArticles();
 
-          if (articlesData.length === 0) {
-            container.innerHTML = '<p class="text-slate-500 py-4">Belum ada berita diterbitkan.</p>';
-            return;
-          }
-
-          // Template HTML Iklan In-Feed Native dengan Kontak Baru
-          const inFeedAdHTML = `
-            <div class="bg-gradient-to-r from-slate-100 to-blue-50 dark:from-slate-800/80 dark:to-slate-900 p-4 rounded-2xl border border-blue-200 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-4 my-1">
-              <div class="w-full sm:w-48 h-28 bg-blue-900 text-white rounded-xl flex flex-col items-center justify-center p-3 text-center flex-shrink-0">
-                <i class="fas fa-bullhorn text-2xl mb-1 text-amber-400"></i>
-                <span class="text-[10px] font-bold uppercase tracking-widest text-blue-200">Iklan Native</span>
-              </div>
-              <div class="flex-grow text-left">
-                <span class="bg-amber-400 text-slate-900 font-extrabold text-[9px] px-2 py-0.5 rounded uppercase">Rekomendasi</span>
-                <h4 class="text-sm font-extrabold text-slate-900 dark:text-white mt-1">Ingin Berita atau Produk Anda Tampil di Sini?</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Dapatkan ribuan pembaca harian Riau & Kepri dengan memasang iklan native di RiauVibe.</p>
-                <button onclick="window.open('https://wa.me/6281999472573', '_blank')" class="mt-2.5 px-3 py-1.5 bg-blue-900 text-white font-bold text-xs rounded-lg hover:bg-blue-800 transition-colors">
-                  Hubungi WA: 081999472573
-                </button>
-              </div>
-            </div>
-          `;
-
-          let feedContent = '';
-          articlesData.forEach((item, index) => {
-            feedContent += `
-              <article onclick="openModal(${index})" class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm hover:shadow-md transition-all cursor-pointer group">
-                <div class="w-full sm:w-48 h-36 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800">
-                  ${item.imageUrl ? `
-                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                  ` : `
-                    <div class="w-full h-full flex items-center justify-center text-slate-400">
-                      <i class="fas fa-newspaper text-3xl"></i>
-                    </div>
-                  `}
-                </div>
-                <div class="flex flex-col justify-between flex-grow w-full">
-                  <div>
-                    <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1.5">
-                      ${item.category || 'Pemerintahan'}
-                    </span>
-                    <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 transition-colors">
-                      ${item.title}
-                    </h4>
-                  </div>
-                  <div class="flex items-center justify-between text-xs text-gray-400 mt-3 pt-2 border-t border-gray-100 dark:border-slate-800">
-                    <span><i class="far fa-clock mr-1"></i> ${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
-                    <span class="text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1">Baca Berita <i class="fas fa-expand text-[10px]"></i></span>
-                  </div>
-                </div>
-              </article>
-            `;
-
-            if (index === 1) {
-              feedContent += inFeedAdHTML;
-            }
-          });
-
-          container.innerHTML = feedContent;
-
+          // Render Sidebar Populer
           if (popularContainer) {
             popularContainer.innerHTML = articlesData.slice(0, 3).map((item, idx) => `
-              <div onclick="openModal(${idx})" class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0 cursor-pointer group">
+              <div onclick="openModalById('${item._id}')" class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0 cursor-pointer group">
                 <span class="text-lg font-extrabold text-blue-900 dark:text-blue-400 w-5 text-center flex-shrink-0">${idx + 1}</span>
                 <div>
                   <h5 class="text-xs font-bold text-gray-800 dark:text-gray-200 line-clamp-2 group-hover:text-blue-600">
@@ -409,8 +360,130 @@
         }
       }
 
-      function openModal(index) {
-        const article = articlesData[index];
+      // FUNGSI UNTUK MERENDER DAFTAR ARTIKEL BERDASARKAN FILTER / SEARCH
+      function renderArticles() {
+        const container = document.getElementById('newsFeedList');
+        const badge = document.getElementById('newsCountBadge');
+        const searchKeyword = document.getElementById('searchInput').value.toLowerCase().trim();
+        const resetBtn = document.getElementById('resetFilterBtn');
+
+        // Filter berdasarkan Kategori & Kata Kunci Pencarian
+        let filtered = articlesData.filter(item => {
+          const matchCategory = activeCategory === 'Semua' || (item.category && item.category.toLowerCase() === activeCategory.toLowerCase());
+          const matchSearch = !searchKeyword || item.title.toLowerCase().includes(searchKeyword);
+          return matchCategory && matchSearch;
+        });
+
+        if (badge) badge.innerText = `${filtered.length} Berita`;
+
+        // Tampilkan/Sembunyikan Tombol Reset Filter
+        if (activeCategory !== 'Semua' || searchKeyword !== '') {
+          resetBtn.classList.remove('hidden');
+        } else {
+          resetBtn.classList.add('hidden');
+        }
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-12 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <i class="fas fa-search text-3xl text-slate-300 dark:text-slate-600 mb-2"></i>
+              <p class="text-sm font-bold text-slate-700 dark:text-slate-300">Tidak ada berita yang sesuai</p>
+              <p class="text-xs text-slate-400 mt-1">Coba gunakan kata kunci lain atau pilih kategori Semua.</p>
+            </div>
+          `;
+          return;
+        }
+
+        const inFeedAdHTML = `
+          <div class="bg-gradient-to-r from-slate-100 to-blue-50 dark:from-slate-800/80 dark:to-slate-900 p-4 rounded-2xl border border-blue-200 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-4 my-1">
+            <div class="w-full sm:w-48 h-28 bg-blue-900 text-white rounded-xl flex flex-col items-center justify-center p-3 text-center flex-shrink-0">
+              <i class="fas fa-bullhorn text-2xl mb-1 text-amber-400"></i>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-blue-200">Iklan Native</span>
+            </div>
+            <div class="flex-grow text-left">
+              <span class="bg-amber-400 text-slate-900 font-extrabold text-[9px] px-2 py-0.5 rounded uppercase">Rekomendasi</span>
+              <h4 class="text-sm font-extrabold text-slate-900 dark:text-white mt-1">Ingin Berita atau Produk Anda Tampil di Sini?</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Dapatkan ribuan pembaca harian Riau & Kepri dengan memasang iklan native di RiauVibe.</p>
+              <button onclick="window.open('https://wa.me/6281999472573', '_blank')" class="mt-2.5 px-3 py-1.5 bg-blue-900 text-white font-bold text-xs rounded-lg hover:bg-blue-800 transition-colors">
+                Hubungi WA: 081999472573
+              </button>
+            </div>
+          </div>
+        `;
+
+        let feedContent = '';
+        filtered.forEach((item, index) => {
+          feedContent += `
+            <article onclick="openModalById('${item._id}')" class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+              <div class="w-full sm:w-48 h-36 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800">
+                ${item.imageUrl ? `
+                  <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                ` : `
+                  <div class="w-full h-full flex items-center justify-center text-slate-400">
+                    <i class="fas fa-newspaper text-3xl"></i>
+                  </div>
+                `}
+              </div>
+              <div class="flex flex-col justify-between flex-grow w-full">
+                <div>
+                  <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1.5">
+                    ${item.category || 'Pemerintahan'}
+                  </span>
+                  <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 transition-colors">
+                    ${item.title}
+                  </h4>
+                </div>
+                <div class="flex items-center justify-between text-xs text-gray-400 mt-3 pt-2 border-t border-gray-100 dark:border-slate-800">
+                  <span><i class="far fa-clock mr-1"></i> ${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                  <span class="text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1">Baca Berita <i class="fas fa-expand text-[10px]"></i></span>
+                </div>
+              </div>
+            </article>
+          `;
+
+          if (index === 1) {
+            feedContent += inFeedAdHTML;
+          }
+        });
+
+        container.innerHTML = feedContent;
+      }
+
+      // FUNGSI AKSI FILTER KATEGORI
+      function filterCategory(categoryName) {
+        activeCategory = categoryName;
+
+        // Ubah Judul Kategori
+        const titleElem = document.getElementById('currentCategoryTitle');
+        titleElem.innerText = categoryName === 'Semua' ? 'Berita Terbaru & Terkini' : `Kategori: ${categoryName}`;
+
+        // Update Tampilan Tombol Navigasi Kategori (Active Class)
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+          if (btn.getAttribute('data-cat') === categoryName) {
+            btn.className = 'cat-btn px-4 py-3 bg-blue-800 text-white transition-colors font-bold';
+          } else {
+            btn.className = 'cat-btn px-4 py-3 hover:bg-blue-800 text-blue-100 transition-colors';
+          }
+        });
+
+        renderArticles();
+      }
+
+      // FUNGSI PENCARIAN REAL-TIME
+      function handleSearch() {
+        renderArticles();
+      }
+
+      // RESET SEMUA FILTER & SEARCH
+      function resetFilter() {
+        activeCategory = 'Semua';
+        document.getElementById('searchInput').value = '';
+        filterCategory('Semua');
+      }
+
+      // DENGAN ID ARTIKEL UNTUK MODAL
+      function openModalById(id) {
+        const article = articlesData.find(a => a._id === id);
         if (!article) return;
 
         document.getElementById('modalCategory').innerText = article.category || 'PEMERINTAHAN';
