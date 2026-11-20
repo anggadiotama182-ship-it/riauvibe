@@ -52,7 +52,7 @@
             <div class="flex items-center flex-wrap gap-4">
                 <span class="flex items-center gap-1.5 font-medium text-slate-200">
                     <i class="far fa-calendar-check text-blue-400"></i>
-                    <span id="currentDateText">Jumat, 23 Oktober 2026</span>
+                    <span id="currentDateText">Jumat, 20 November 2026</span>
                 </span>
                 <span class="hidden sm:inline text-slate-600">|</span>
                 <div class="flex items-center gap-2">
@@ -67,18 +67,17 @@
                     <i class="fas fa-feather-pointed text-[11px]"></i>
                     <span>Studio Redaksi & Iklan</span>
                 </button>
-                <button onclick="document.documentElement.classList.toggle('dark')" class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 transition-colors">
+                <button onclick="document.documentElement.classList.toggle('dark')" class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 transition-colors" title="Ganti Mode Gelap/Terang">
                     <i class="fas fa-moon text-xs"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- 2. Main Brand Header dengan Logo Grafis Vektor Baru RiauVibe -->
+    <!-- 2. Main Brand Header -->
     <header class="bg-white dark:bg-slate-900 shadow-sm border-b border-gray-100 dark:border-slate-800 sticky top-0 z-20">
         <div class="container mx-auto px-4 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4 max-w-6xl">
             <a href="#" onclick="filterCategory('Semua'); return false;" class="flex items-center gap-3 group">
-                <!-- Logo Vektor Elegan Inisial RV RiauVibe -->
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-700 via-blue-900 to-amber-500 flex items-center justify-center shadow-lg text-white font-black text-xl tracking-tighter border border-teal-500/30 group-hover:scale-105 transition-transform">
                     RV
                 </div>
@@ -94,7 +93,7 @@
             <div class="relative w-full sm:w-80">
                 <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="Cari berita terkini Riau..." 
                        class="w-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-full py-2 pl-4 pr-10 text-xs focus:outline-none focus:border-blue-900 dark:focus:border-blue-500 transition-all">
-                <button class="absolute right-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-blue-900 dark:hover:text-blue-400">
+                <button type="button" class="absolute right-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-blue-900 dark:hover:text-blue-400">
                     <i class="fas fa-search text-xs"></i>
                 </button>
             </div>
@@ -104,7 +103,7 @@
                 <a href="mailto:pekanbaruonlinego@gmail.com" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
                     <i class="far fa-envelope text-blue-600"></i> pekanbaruonlinego@gmail.com
                 </a>
-                <a href="https://wa.me/6281999472573" target="_blank" class="flex items-center gap-1.5 bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-emerald-500 transition-colors">
+                <a href="https://wa.me/6281999472573" target="_blank" rel="noopener" class="flex items-center gap-1.5 bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-emerald-500 transition-colors">
                     <i class="fab fa-whatsapp"></i> 081999472573
                 </a>
             </div>
@@ -142,7 +141,7 @@
     <div class="container mx-auto px-4 mt-4 max-w-6xl">
         <div class="bg-slate-100 dark:bg-slate-800/60 border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-3 text-center min-h-[90px] flex flex-col items-center justify-center overflow-hidden">
             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Ruang Iklan Sponsor / AdSense</span>
-            <a href="https://wa.me/6281999472573" target="_blank" class="block w-full max-w-2xl py-2 px-4 bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-xl shadow-sm hover:opacity-95 transition-opacity">
+            <a href="https://wa.me/6281999472573" target="_blank" rel="noopener" class="block w-full max-w-2xl py-2 px-4 bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-xl shadow-sm hover:opacity-95 transition-opacity">
                 <div class="flex items-center justify-between gap-2">
                     <div class="text-left">
                         <span class="bg-amber-400 text-slate-900 font-extrabold text-[9px] px-1.5 py-0.5 rounded uppercase">Sponsor Utama</span>
@@ -226,13 +225,13 @@
                 </div>
             </div>
 
-            <div class="p-6 md:p-8 overflow-y-auto custom-scroll flex-grow space-y-6">
+            <div id="modalScrollArea" class="p-6 md:p-8 overflow-y-auto custom-scroll flex-grow space-y-6">
                 <h2 id="modalTitle" class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
                     Loading...
                 </h2>
 
                 <div id="modalImageWrapper" class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
-                    <img id="modalImage" src="" alt="" class="w-full h-auto max-h-[400px] object-cover" />
+                    <img id="modalImage" src="" alt="" onerror="document.getElementById('modalImageWrapper').classList.add('hidden')" class="w-full h-auto max-h-[400px] object-cover" />
                     <p id="modalImageCaption" class="text-[11px] text-slate-400 dark:text-slate-500 p-2.5 bg-slate-50 dark:bg-slate-950/50 flex items-center gap-1.5">
                         <i class="fas fa-camera"></i> <span id="captionText">Dokumentasi Liputan RiauVibe.</span>
                     </p>
@@ -256,24 +255,22 @@
                         <span class="text-red-500">📑</span> BERITA TERKAIT LAINNYA
                     </h3>
                     
-                    <div id="relatedNewsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <!-- Diisi otomatis via JavaScript -->
-                    </div>
+                    <div id="relatedNewsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
                 </div>
 
                 <hr class="border-slate-100 dark:border-slate-800 my-8">
 
                 <section class="space-y-6 pt-2">
                     <h3 class="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                        <i class="far fa-comments text-blue-600"></i> TANGGAPAN PEMBACA ( <span id="commentCount">2</span> )
+                        <i class="far fa-comments text-blue-600"></i> TANGGAPAN PEMBACA ( <span id="commentCount">3</span> )
                     </h3>
 
                     <form onsubmit="submitComment(event)" class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 md:p-5 border border-slate-200/80 dark:border-slate-800 space-y-3">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <input type="text" id="commentName" placeholder="Nama Anda..." required class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-blue-600">
-                            <input type="text" id="commentCity" placeholder="Kota / Asal (misal: Pekanbaru)..." required class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-blue-600">
+                            <input type="text" id="commentName" maxlength="60" placeholder="Nama Anda..." required class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-blue-600">
+                            <input type="text" id="commentCity" maxlength="40" placeholder="Kota / Asal (misal: Pekanbaru)..." required class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-blue-600">
                         </div>
-                        <textarea id="commentText" rows="3" placeholder="Tulis tanggapan atau opini Anda secara santun..." required class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-blue-600"></textarea>
+                        <textarea id="commentText" rows="3" maxlength="500" placeholder="Tulis tanggapan atau opini Anda secara santun..." required class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-blue-600"></textarea>
                         <div class="flex justify-end">
                             <button type="submit" class="px-5 py-2.5 bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 shadow-sm">
                                 <i class="fas fa-paper-plane text-[10px]"></i> Kirim Tanggapan
@@ -281,20 +278,8 @@
                         </div>
                     </form>
 
-                    <div id="commentsList" class="space-y-3">
-                        <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-800 flex items-start gap-3">
-                            <div class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold text-xs flex items-center justify-center flex-shrink-0">
-                                H
-                            </div>
-                            <div class="flex-grow">
-                                <div class="flex items-center justify-between mb-1">
-                                    <h5 class="text-xs font-bold text-slate-800 dark:text-slate-200">Ir. Hendra Pratama <span class="text-slate-400 font-normal">(Dumai)</span></h5>
-                                    <span class="text-[10px] text-slate-400">21 Okt 2026</span>
-                                </div>
-                                <p class="text-xs text-slate-600 dark:text-slate-400">Perjalanan tol dan jaringan logistik regional sekarang jauh lebih efisien dan tertib.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Daftar 3 Komentar Otomatis Positif & Komentar Baru -->
+                    <div id="commentsList" class="space-y-3"></div>
                 </section>
             </div>
         </div>
@@ -359,7 +344,7 @@
                         <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-users text-[10px] text-slate-600"></i> Susunan Redaksi</a></li>
                         <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-shield-halved text-[10px] text-slate-600"></i> Pedoman Media Siber</a></li>
                         <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-lock text-[10px] text-slate-600"></i> Kebijakan Privasi</a></li>
-                        <li><a href="https://wa.me/6281999472573" target="_blank" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-bullhorn text-[10px] text-slate-600"></i> Pasang Iklan & Kemitraan</a></li>
+                        <li><a href="https://wa.me/6281999472573" target="_blank" rel="noopener" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-bullhorn text-[10px] text-slate-600"></i> Pasang Iklan & Kemitraan</a></li>
                         <li><a href="mailto:pekanbaruonlinego@gmail.com" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-envelope text-[10px] text-slate-600"></i> Kontak & Pengaduan</a></li>
                     </ul>
                 </div>
@@ -385,7 +370,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <i class="fab fa-whatsapp text-emerald-500 text-xs"></i>
-                            <a href="https://wa.me/6281999472573" target="_blank" class="hover:underline">081999472573</a>
+                            <a href="https://wa.me/6281999472573" target="_blank" rel="noopener" class="hover:underline">081999472573</a>
                         </div>
                     </div>
                 </div>
@@ -402,7 +387,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPT LOGIC FILTER KATEGORI, SEARCH & SANITY FETCH -->
+    <!-- SCRIPT LOGIC FILTER KATEGORI, SEARCH, SANITY FETCH & AUTO 3 KOMENTAR POSITIF -->
     <script>
       const PROJECT_ID = 'z0v67ol7';
       const DATASET = 'production';
@@ -410,8 +395,176 @@
       let activeCategory = 'Semua';
       let currentFontSize = 16;
 
+      // Fungsi keamanan Escape HTML agar komentar tidak pernah merusak struktur halaman
+      function escapeHTML(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      // Format Tanggal Aman
+      function formatSafeDate(dateStr, options = { day: 'numeric', month: 'short', year: 'numeric' }) {
+        const d = dateStr ? new Date(dateStr) : new Date();
+        return isNaN(d.getTime()) ? 'Hari ini' : d.toLocaleDateString('id-ID', options);
+      }
+
+      // Update Tanggal Hari Ini di Header Secara Otomatis
+      const dateElem = document.getElementById('currentDateText');
+      if (dateElem) {
+        dateElem.innerText = new Date().toLocaleDateString('id-ID', {
+          weekday: 'long',
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+      }
+
+      // Data Pembaca Lokal Riau & Kepri untuk Auto-Komentar Positif
+      const AUTO_READERS = [
+        { name: "Rizky Pratama", city: "Pekanbaru" },
+        { name: "Siti Rahmawati", city: "Batam" },
+        { name: "Budi Santoso", city: "Dumai" },
+        { name: "Dewi Lestari", city: "Tanjungpinang" },
+        { name: "Andi Saputra", city: "Siak" },
+        { name: "Fitri Handayani", city: "Bengkalis" },
+        { name: "Hendra Wijaya", city: "Kampar" },
+        { name: "Nadia Putri", city: "Karimun" },
+        { name: "Reza Pahlevi", city: "Rokan Hilir" },
+        { name: "Maya Sari", city: "Pelalawan" },
+        { name: "Fajar Nugroho", city: "Indragiri Hilir" },
+        { name: "Ayu Kartika", city: "Natuna" },
+        { name: "Dimas Anggara", city: "Pekanbaru" },
+        { name: "Rina Marlina", city: "Batam" },
+        { name: "Taufik Hidayat", city: "Kuansing" },
+        { name: "Yuni Astuti", city: "Meranti" },
+        { name: "Bagus Setiawan", city: "Rokan Hulu" },
+        { name: "Lia Amelia", city: "Indragiri Hulu" },
+        { name: "Rudi Hartono", city: "Anambas" },
+        { name: "Putri Ramadhani", city: "Lingga" }
+      ];
+
+      const POSITIVE_COMMENTS_POOL = [
+        "Informasinya sangat bermanfaat dan jelas, terima kasih RiauVibe sudah menyajikan berita terkini yang membangun.",
+        "Mantap liputannya! Selalu update dan akurat menyajikan kabar terbaru untuk masyarakat Riau dan Kepri.",
+        "Sangat informatif, semoga kebijakan dan perkembangan daerah kita ke depannya semakin maju dan positif.",
+        "Terima kasih infonya min, sangat membantu buat warga yang butuh perkembangan informasi cepat dan terpercaya.",
+        "Penyampaian beritanya lugas dan enak dibaca. Sukses terus untuk tim redaksi RiauVibe!",
+        "Alhamdulillah, kabar baik seperti ini sangat layak diapresiasi. Semoga lancar terus ke depannya.",
+        "Setuju dengan langkah positif yang disampaikan dalam berita ini, sangat mencerahkan masyarakat.",
+        "Portal berita andalan tiap pagi di Pekanbaru, infonya selalu relevan dan berimbang.",
+        "Keren! Terus semangat mengabarkan informasi positif dan kemajuan pembangunan di Bumi Lancang Kuning & Kepri.",
+        "Bacaan yang sangat mencerahkan dan edukatif. Terima kasih RiauVibe sudah konsisten mengawal isu daerah."
+      ];
+
+      function hashArticleId(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+          hash = ((hash << 5) - hash) + str.charCodeAt(i);
+          hash |= 0;
+        }
+        return Math.abs(hash);
+      }
+
+      // Menghasilkan 3 Komentar Positif Random dengan Timestamp WIB yang Realistis
+      function getThreePositiveComments(article) {
+        const seed = hashArticleId(article._id || article.title || 'riauvibe');
+        const baseDate = article.publishedAt && !isNaN(new Date(article.publishedAt).getTime())
+          ? new Date(article.publishedAt)
+          : new Date();
+
+        // Gunakan komentar kontekstual dari Sanity jika tersedia (untuk berita baru)
+        if (Array.isArray(article.comments) && article.comments.length >= 3) {
+          return article.comments.slice(0, 3).map((c, idx) => {
+            const readerCity = AUTO_READERS[(seed + idx * 5) % AUTO_READERS.length].city;
+            const cDate = c.createdAt ? new Date(c.createdAt) : new Date(baseDate.getTime() + (idx + 1) * (12 + (seed % 15)) * 60000);
+            const datePart = cDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+            const timePart = cDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+            return {
+              name: c.name || c.author || AUTO_READERS[(seed + idx) % AUTO_READERS.length].name,
+              city: c.city || readerCity,
+              text: c.text || c.comment || POSITIVE_COMMENTS_POOL[(seed + idx) % POSITIVE_COMMENTS_POOL.length],
+              timestamp: `${datePart} • ${timePart} WIB`
+            };
+          });
+        }
+
+        // Fallback otomatis untuk semua berita lama (3 pembaca & 3 komentar positif unik)
+        const results = [];
+        const usedReaderIdx = new Set();
+        const usedTextIdx = new Set();
+
+        for (let i = 0; i < 3; i++) {
+          let rIdx = (seed + i * 7) % AUTO_READERS.length;
+          while (usedReaderIdx.has(rIdx)) {
+            rIdx = (rIdx + 1) % AUTO_READERS.length;
+          }
+          usedReaderIdx.add(rIdx);
+
+          let tIdx = (seed + i * 11) % POSITIVE_COMMENTS_POOL.length;
+          while (usedTextIdx.has(tIdx)) {
+            tIdx = (tIdx + 1) % POSITIVE_COMMENTS_POOL.length;
+          }
+          usedTextIdx.add(tIdx);
+
+          const cDate = new Date(baseDate.getTime() + (i + 1) * (14 + (seed % 18)) * 60000);
+          const datePart = cDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+          const timePart = cDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+          results.push({
+            name: AUTO_READERS[rIdx].name,
+            city: AUTO_READERS[rIdx].city,
+            text: POSITIVE_COMMENTS_POOL[tIdx],
+            timestamp: `${datePart} • ${timePart} WIB`
+          });
+        }
+
+        return results;
+      }
+
+      function renderArticleComments(article) {
+        const commentsList = document.getElementById('commentsList');
+        const commentCountElem = document.getElementById('commentCount');
+        const threeComments = getThreePositiveComments(article);
+
+        const avatarColors = [
+          'bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300',
+          'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300',
+          'bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300'
+        ];
+
+        commentsList.innerHTML = threeComments.map((item, idx) => {
+          const safeName = escapeHTML(item.name);
+          const safeCity = escapeHTML(item.city);
+          const safeText = escapeHTML(item.text);
+          const initials = item.name.trim().split(/\s+/).map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'RV';
+
+          return `
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-800 flex items-start gap-3">
+                <div class="w-9 h-9 rounded-full ${avatarColors[idx % avatarColors.length]} font-bold text-xs flex items-center justify-center flex-shrink-0">
+                    ${escapeHTML(initials)}
+                </div>
+                <div class="flex-grow">
+                    <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                        <h5 class="text-xs font-bold text-slate-800 dark:text-slate-200">${safeName} <span class="text-slate-400 font-normal">(${safeCity})</span></h5>
+                        <span class="text-[10px] text-slate-400">${escapeHTML(item.timestamp)}</span>
+                    </div>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">${safeText}</p>
+                </div>
+            </div>
+          `;
+        }).join('');
+
+        if (commentCountElem) {
+          commentCountElem.innerText = threeComments.length;
+        }
+      }
+
       async function loadBeritaSanity() {
-        const container = document.getElementById('newsFeedList');
         const popularContainer = document.getElementById('popularNewsContainer');
         const badge = document.getElementById('newsCountBadge');
 
@@ -421,8 +574,10 @@
           "slug": slug.current,
           category,
           publishedAt,
+          summary,
           "imageUrl": mainImage.asset->url,
-          body
+          body,
+          comments
         }`);
 
         const endpoint = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
@@ -432,26 +587,24 @@
           const data = await response.json();
           articlesData = data.result || [];
 
-          // Render Feed Berita Awal
           renderArticles();
 
-          // Render Sidebar Populer
           if (popularContainer) {
             popularContainer.innerHTML = articlesData.slice(0, 3).map((item, idx) => `
               <div onclick="openModalById('${item._id}')" class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0 cursor-pointer group">
                 <span class="text-lg font-extrabold text-blue-900 dark:text-blue-400 w-5 text-center flex-shrink-0">${idx + 1}</span>
                 <div>
                   <h5 class="text-xs font-bold text-gray-800 dark:text-gray-200 line-clamp-2 group-hover:text-blue-600">
-                    ${item.title}
+                    ${escapeHTML(item.title)}
                   </h5>
-                  <span class="text-[10px] text-gray-400">${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</span>
+                  <span class="text-[10px] text-gray-400">${formatSafeDate(item.publishedAt, { day: 'numeric', month: 'short' })}</span>
                 </div>
               </div>
             `).join('');
           }
-
         } catch (error) {
           console.error("Gagal memuat berita Sanity:", error);
+          if (badge) badge.innerText = "Offline";
         }
       }
 
@@ -463,7 +616,7 @@
 
         let filtered = articlesData.filter(item => {
           const matchCategory = activeCategory === 'Semua' || (item.category && item.category.toLowerCase() === activeCategory.toLowerCase());
-          const matchSearch = !searchKeyword || item.title.toLowerCase().includes(searchKeyword);
+          const matchSearch = !searchKeyword || (item.title && item.title.toLowerCase().includes(searchKeyword));
           return matchCategory && matchSearch;
         });
 
@@ -509,7 +662,7 @@
             <article onclick="openModalById('${item._id}')" class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm hover:shadow-md transition-all cursor-pointer group">
               <div class="w-full sm:w-48 h-36 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800">
                 ${item.imageUrl ? `
-                  <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <img src="${item.imageUrl}" alt="${escapeHTML(item.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 ` : `
                   <div class="w-full h-full flex items-center justify-center text-slate-400">
                     <i class="fas fa-newspaper text-3xl"></i>
@@ -519,14 +672,14 @@
               <div class="flex flex-col justify-between flex-grow w-full">
                 <div>
                   <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1.5">
-                    ${item.category || 'Pemerintahan'}
+                    ${escapeHTML(item.category || 'Pemerintahan')}
                   </span>
                   <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    ${item.title}
+                    ${escapeHTML(item.title)}
                   </h4>
                 </div>
                 <div class="flex items-center justify-between text-xs text-gray-400 mt-3 pt-2 border-t border-gray-100 dark:border-slate-800">
-                  <span><i class="far fa-clock mr-1"></i> ${new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                  <span><i class="far fa-clock mr-1"></i> ${formatSafeDate(item.publishedAt)}</span>
                   <span class="text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1">Baca Berita <i class="fas fa-expand text-[10px]"></i></span>
                 </div>
               </div>
@@ -593,14 +746,17 @@
           }).filter(Boolean);
         }
 
-        document.getElementById('modalSummary').innerText = fullText[0] || article.title;
+        document.getElementById('modalSummary').innerText = article.summary || fullText[0] || article.title;
 
         const bodyContainer = document.getElementById('modalBody');
-        if (fullText.length > 1) {
-          bodyContainer.innerHTML = fullText.slice(1).map(p => `<p>${p}</p>`).join('');
+        if (fullText.length > 0) {
+          bodyContainer.innerHTML = fullText.map(p => `<p>${escapeHTML(p)}</p>`).join('');
         } else {
-          bodyContainer.innerHTML = `<p>${fullText[0] || 'Isi artikel lengkap dari Sanity CMS.'}</p>`;
+          bodyContainer.innerHTML = `<p>${escapeHTML(article.title)}</p>`;
         }
+
+        // Render 3 Komentar Positif dari Pembaca Random
+        renderArticleComments(article);
 
         // Render Berita Terkait Lainnya di Modal
         const relatedContainer = document.getElementById('relatedNewsGrid');
@@ -609,17 +765,20 @@
         if (relatedItems.length > 0) {
             relatedContainer.innerHTML = relatedItems.map(rel => `
                 <div onclick="openModalById('${rel._id}')" class="bg-slate-800/60 dark:bg-slate-800 p-3 rounded-lg border border-slate-700 hover:border-slate-500 transition cursor-pointer group">
-                    ${rel.imageUrl ? `<img src="${rel.imageUrl}" alt="${rel.title}" class="w-full h-28 object-cover rounded mb-2 group-hover:opacity-90 transition-opacity">` : ''}
-                    <span class="text-[10px] text-red-400 uppercase font-semibold">${rel.category || 'Pemerintahan'}</span>
+                    ${rel.imageUrl ? `<img src="${rel.imageUrl}" alt="${escapeHTML(rel.title)}" class="w-full h-28 object-cover rounded mb-2 group-hover:opacity-90 transition-opacity">` : ''}
+                    <span class="text-[10px] text-red-400 uppercase font-semibold">${escapeHTML(rel.category || 'Pemerintahan')}</span>
                     <h4 class="text-white text-xs font-semibold mt-1 line-clamp-2 group-hover:text-blue-300 transition-colors">
-                        ${rel.title}
+                        ${escapeHTML(rel.title)}
                     </h4>
-                    <p class="text-[10px] text-slate-400 mt-2">${new Date(rel.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                    <p class="text-[10px] text-slate-400 mt-2">${formatSafeDate(rel.publishedAt, { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                 </div>
             `).join('');
         } else {
             relatedContainer.innerHTML = `<p class="text-xs text-slate-400">Belum ada berita terkait lainnya.</p>`;
         }
+
+        const scrollArea = document.getElementById('modalScrollArea');
+        if (scrollArea) scrollArea.scrollTop = 0;
 
         const modal = document.getElementById('articleModal');
         const container = document.getElementById('modalContainer');
@@ -657,22 +816,24 @@
 
       function submitComment(e) {
         e.preventDefault();
-        const name = document.getElementById('commentName').value;
-        const city = document.getElementById('commentCity').value;
-        const text = document.getElementById('commentText').value;
+        const name = document.getElementById('commentName').value.trim();
+        const city = document.getElementById('commentCity').value.trim();
+        const text = document.getElementById('commentText').value.trim();
+        if (!name || !city || !text) return;
 
         const commentsList = document.getElementById('commentsList');
+        const initials = name.split(/\s+/).map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'RV';
         const newComment = `
           <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-800 flex items-start gap-3">
               <div class="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 font-bold text-xs flex items-center justify-center flex-shrink-0">
-                  ${name.charAt(0).toUpperCase()}
+                  ${escapeHTML(initials)}
               </div>
               <div class="flex-grow">
                   <div class="flex items-center justify-between mb-1">
-                      <h5 class="text-xs font-bold text-slate-800 dark:text-slate-200">${name} <span class="text-slate-400 font-normal">(${city})</span></h5>
+                      <h5 class="text-xs font-bold text-slate-800 dark:text-slate-200">${escapeHTML(name)} <span class="text-slate-400 font-normal">(${escapeHTML(city)})</span></h5>
                       <span class="text-[10px] text-slate-400">Baru saja</span>
                   </div>
-                  <p class="text-xs text-slate-600 dark:text-slate-400">${text}</p>
+                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">${escapeHTML(text)}</p>
               </div>
           </div>
         `;
