@@ -262,7 +262,7 @@
 
                 <section class="space-y-6 pt-2">
                     <h3 class="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                        <i class="far fa-comments text-blue-600"></i> TANGGAPAN PEMBACA ( <span id="commentCount">3</span> )
+                        <i class="far fa-comments text-blue-600"></i> TANGGAPAN PEMBACA ( <span id="commentCount">0</span> )
                     </h3>
 
                     <form onsubmit="submitComment(event)" class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 md:p-5 border border-slate-200/80 dark:border-slate-800 space-y-3">
@@ -278,7 +278,7 @@
                         </div>
                     </form>
 
-                    <!-- Daftar 3 Komentar Otomatis Positif & Komentar Baru -->
+                    <!-- Daftar 1-10 Komentar Otomatis Positif & Komentar Baru -->
                     <div id="commentsList" class="space-y-3"></div>
                 </section>
             </div>
@@ -387,7 +387,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPT LOGIC FILTER KATEGORI, SEARCH, SANITY FETCH & AUTO 3 KOMENTAR POSITIF -->
+    <!-- SCRIPT LOGIC FILTER KATEGORI, SEARCH, SANITY FETCH & AUTO 1-10 KOMENTAR POSITIF -->
     <script>
       const PROJECT_ID = 'z0v67ol7';
       const DATASET = 'production';
@@ -423,7 +423,7 @@
         });
       }
 
-      // Data Pembaca Lokal Riau & Kepri untuk Auto-Komentar Positif
+      // 24 Profil Pembaca Lokal Riau & Kepri untuk Auto-Komentar Positif (1-10 Komentar)
       const AUTO_READERS = [
         { name: "Rizky Pratama", city: "Pekanbaru" },
         { name: "Siti Rahmawati", city: "Batam" },
@@ -444,9 +444,14 @@
         { name: "Bagus Setiawan", city: "Rokan Hulu" },
         { name: "Lia Amelia", city: "Indragiri Hulu" },
         { name: "Rudi Hartono", city: "Anambas" },
-        { name: "Putri Ramadhani", city: "Lingga" }
+        { name: "Putri Ramadhani", city: "Lingga" },
+        { name: "Ilham Kurniawan", city: "Duri" },
+        { name: "Nisa Aulia", city: "Bintan" },
+        { name: "Dedi Supriadi", city: "Tembilahan" },
+        { name: "Indah Permata", city: "Bagansiapiapi" }
       ];
 
+      // 20 Variasi Komentar Positif & Natural
       const POSITIVE_COMMENTS_POOL = [
         "Informasinya sangat bermanfaat dan jelas, terima kasih RiauVibe sudah menyajikan berita terkini yang membangun.",
         "Mantap liputannya! Selalu update dan akurat menyajikan kabar terbaru untuk masyarakat Riau dan Kepri.",
@@ -455,9 +460,19 @@
         "Penyampaian beritanya lugas dan enak dibaca. Sukses terus untuk tim redaksi RiauVibe!",
         "Alhamdulillah, kabar baik seperti ini sangat layak diapresiasi. Semoga lancar terus ke depannya.",
         "Setuju dengan langkah positif yang disampaikan dalam berita ini, sangat mencerahkan masyarakat.",
-        "Portal berita andalan tiap pagi di Pekanbaru, infonya selalu relevan dan berimbang.",
+        "Portal berita andalan tiap pagi, infonya selalu relevan, tajam, dan berimbang.",
         "Keren! Terus semangat mengabarkan informasi positif dan kemajuan pembangunan di Bumi Lancang Kuning & Kepri.",
-        "Bacaan yang sangat mencerahkan dan edukatif. Terima kasih RiauVibe sudah konsisten mengawal isu daerah."
+        "Bacaan yang sangat mencerahkan dan edukatif. Terima kasih RiauVibe sudah konsisten mengawal isu daerah.",
+        "Semoga program dan upaya baik ini bisa dirasakan langsung manfaatnya oleh seluruh lapisan masyarakat.",
+        "Liputan yang sangat komprehensif, datanya jelas dan mudah dipahami pembaca.",
+        "Mendukung penuh segala bentuk inovasi dan kemajuan positif untuk daerah kita.",
+        "Terima kasih sudah berbagi kabar yang inspiratif hari ini, sukses selalu RiauVibe.",
+        "Sangat membantu untuk menambah wawasan seputar perkembangan terkini di wilayah Riau dan Kepri.",
+        "Berita yang menyejukkan dan membawa optimisme baru buat warga.",
+        "Luar biasa, semoga sinergi yang terjalin bisa terus dipertahankan dan ditingkatkan lagi.",
+        "Selalu suka baca berita di RiauVibe karena bahasanya tertata rapi dan tidak bertele-tele.",
+        "Semoga ke depannya makin banyak kabar baik dan pembangunan merata hingga ke pelosok.",
+        "Mantap jiwa! Terus menjadi media lokal kebanggaan Riau dan Kepulauan Riau."
       ];
 
       function hashArticleId(str) {
@@ -469,49 +484,52 @@
         return Math.abs(hash);
       }
 
-      // Menghasilkan 3 Komentar Positif Random dengan Timestamp WIB yang Realistis
-      function getThreePositiveComments(article) {
+      // Menghasilkan Jumlah Acak 1 hingga 10 Komentar Positif per Artikel
+      function getRandomPositiveComments(article) {
         const seed = hashArticleId(article._id || article.title || 'riauvibe');
+        const targetCount = (seed % 10) + 1; // Jumlah komentar bervariasi: 1 s.d. 10 komentar per artikel
         const baseDate = article.publishedAt && !isNaN(new Date(article.publishedAt).getTime())
           ? new Date(article.publishedAt)
           : new Date();
 
-        // Gunakan komentar kontekstual dari Sanity jika tersedia (untuk berita baru)
-        if (Array.isArray(article.comments) && article.comments.length >= 3) {
-          return article.comments.slice(0, 3).map((c, idx) => {
-            const readerCity = AUTO_READERS[(seed + idx * 5) % AUTO_READERS.length].city;
-            const cDate = c.createdAt ? new Date(c.createdAt) : new Date(baseDate.getTime() + (idx + 1) * (12 + (seed % 15)) * 60000);
-            const datePart = cDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
-            const timePart = cDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-
-            return {
-              name: c.name || c.author || AUTO_READERS[(seed + idx) % AUTO_READERS.length].name,
-              city: c.city || readerCity,
-              text: c.text || c.comment || POSITIVE_COMMENTS_POOL[(seed + idx) % POSITIVE_COMMENTS_POOL.length],
-              timestamp: `${datePart} • ${timePart} WIB`
-            };
-          });
-        }
-
-        // Fallback otomatis untuk semua berita lama (3 pembaca & 3 komentar positif unik)
         const results = [];
         const usedReaderIdx = new Set();
         const usedTextIdx = new Set();
 
-        for (let i = 0; i < 3; i++) {
-          let rIdx = (seed + i * 7) % AUTO_READERS.length;
+        // Jika berita baru sudah memiliki komentar kontekstual dari Sanity, masukkan lebih dulu
+        if (Array.isArray(article.comments) && article.comments.length > 0) {
+          article.comments.forEach((c, idx) => {
+            if (results.length >= targetCount) return;
+            const readerCity = AUTO_READERS[(seed + idx * 5) % AUTO_READERS.length].city;
+            const cDate = c.createdAt ? new Date(c.createdAt) : new Date(baseDate.getTime() + (idx + 1) * (10 + (seed % 12)) * 60000);
+            const datePart = cDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+            const timePart = cDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+            results.push({
+              name: c.name || c.author || AUTO_READERS[(seed + idx) % AUTO_READERS.length].name,
+              city: c.city || readerCity,
+              text: c.text || c.comment || POSITIVE_COMMENTS_POOL[(seed + idx) % POSITIVE_COMMENTS_POOL.length],
+              timestamp: `${datePart} • ${timePart} WIB`
+            });
+          });
+        }
+
+        // Lengkapi sisa komentar hingga mencapai targetCount (antara 1 sampai 10)
+        let step = results.length;
+        while (results.length < targetCount) {
+          let rIdx = (seed + step * 7) % AUTO_READERS.length;
           while (usedReaderIdx.has(rIdx)) {
             rIdx = (rIdx + 1) % AUTO_READERS.length;
           }
           usedReaderIdx.add(rIdx);
 
-          let tIdx = (seed + i * 11) % POSITIVE_COMMENTS_POOL.length;
+          let tIdx = (seed + step * 11) % POSITIVE_COMMENTS_POOL.length;
           while (usedTextIdx.has(tIdx)) {
             tIdx = (tIdx + 1) % POSITIVE_COMMENTS_POOL.length;
           }
           usedTextIdx.add(tIdx);
 
-          const cDate = new Date(baseDate.getTime() + (i + 1) * (14 + (seed % 18)) * 60000);
+          const cDate = new Date(baseDate.getTime() + (step + 1) * (11 + (seed % 15)) * 60000);
           const datePart = cDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
           const timePart = cDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
@@ -521,6 +539,8 @@
             text: POSITIVE_COMMENTS_POOL[tIdx],
             timestamp: `${datePart} • ${timePart} WIB`
           });
+
+          step++;
         }
 
         return results;
@@ -529,15 +549,17 @@
       function renderArticleComments(article) {
         const commentsList = document.getElementById('commentsList');
         const commentCountElem = document.getElementById('commentCount');
-        const threeComments = getThreePositiveComments(article);
+        const randomComments = getRandomPositiveComments(article);
 
         const avatarColors = [
           'bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300',
           'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300',
-          'bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300'
+          'bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300',
+          'bg-purple-100 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300',
+          'bg-rose-100 dark:bg-rose-900/60 text-rose-800 dark:text-rose-300'
         ];
 
-        commentsList.innerHTML = threeComments.map((item, idx) => {
+        commentsList.innerHTML = randomComments.map((item, idx) => {
           const safeName = escapeHTML(item.name);
           const safeCity = escapeHTML(item.city);
           const safeText = escapeHTML(item.text);
@@ -560,7 +582,7 @@
         }).join('');
 
         if (commentCountElem) {
-          commentCountElem.innerText = threeComments.length;
+          commentCountElem.innerText = randomComments.length;
         }
       }
 
@@ -755,7 +777,7 @@
           bodyContainer.innerHTML = `<p>${escapeHTML(article.title)}</p>`;
         }
 
-        // Render 3 Komentar Positif dari Pembaca Random
+        // Render 1-10 Komentar Positif Acak dari Pembaca Lokal
         renderArticleComments(article);
 
         // Render Berita Terkait Lainnya di Modal
