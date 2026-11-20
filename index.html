@@ -8,6 +8,15 @@
     <!-- Platform & SEO Metadata -->
     <meta name="siteName" content="RiauVibe" />
     <meta name="description" content="Portal berita terpercaya dan terkini menyajikan informasi seputar peristiwa, pemerintahan, ekonomi, olahraga, dan gaya hidup di Provinsi Riau dan Kepulauan Riau." />
+    <meta name="robots" content="index, follow" />
+
+    <!-- =====================================================================
+         GOOGLE ADSENSE SCRIPT (Ganti ca-pub-XXXXXXXXXXXXXXXX dengan ID Anda)
+         ===================================================================== -->
+    <!--
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+         crossorigin="anonymous"></script>
+    -->
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -137,10 +146,22 @@
         </div>
     </div>
 
-    <!-- BANNER IKLAN UTAMA ATAS -->
+    <!-- SLOT IKLAN 1: LEADERBOARD HEADER (ADSENSE READY + FALLBACK SPONSOR) -->
     <div class="container mx-auto px-4 mt-4 max-w-6xl">
-        <div class="bg-slate-100 dark:bg-slate-800/60 border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-3 text-center min-h-[90px] flex flex-col items-center justify-center overflow-hidden">
-            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Ruang Iklan Sponsor / AdSense</span>
+        <div class="bg-slate-100 dark:bg-slate-800/60 border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-3 text-center min-h-[100px] flex flex-col items-center justify-center overflow-hidden">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Advertisement • Ruang Iklan Sponsor / AdSense</span>
+            
+            <!-- Slot AdSense Leaderboard (Aktifkan setelah masukkan data-ad-client & data-ad-slot) -->
+            <div class="w-full flex justify-center">
+                <ins class="adsbygoogle"
+                     style="display:block; width:100%; max-width:728px;"
+                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                     data-ad-slot="1111111111"
+                     data-ad-format="horizontal"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <!-- Banner Fallback Mandiri RiauVibe -->
             <a href="https://wa.me/6281999472573" target="_blank" rel="noopener" class="block w-full max-w-2xl py-2 px-4 bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-xl shadow-sm hover:opacity-95 transition-opacity">
                 <div class="flex items-center justify-between gap-2">
                     <div class="text-left">
@@ -184,10 +205,18 @@
                     <div id="popularNewsContainer" class="flex flex-col gap-3"></div>
                 </div>
 
-                <!-- IKLAN SIDEBAR BOX -->
+                <!-- SLOT IKLAN 2: SIDEBAR 300x250 (ADSENSE READY) -->
                 <div class="bg-slate-100 dark:bg-slate-800/60 border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-4 text-center">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Iklan Sidebar</span>
-                    <div class="bg-gradient-to-br from-amber-500 to-red-600 text-white rounded-xl p-4 text-left shadow-sm">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Advertisement • Iklan Sidebar</span>
+                    
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="2222222222"
+                         data-ad-format="rectangle"
+                         data-full-width-responsive="true"></ins>
+
+                    <div class="bg-gradient-to-br from-amber-500 to-red-600 text-white rounded-xl p-4 text-left shadow-sm mt-1">
                         <span class="bg-black/30 text-white font-extrabold text-[9px] px-2 py-0.5 rounded uppercase">Promo Unggulan</span>
                         <h5 class="text-sm font-extrabold mt-2 leading-tight">Sewa Space Iklan Banner 300x250</h5>
                         <p class="text-[11px] text-amber-100 mt-1">Tingkatkan jangkauan bisnis Anda ke seluruh Riau & Kepri.</p>
@@ -205,12 +234,16 @@
         <div class="bg-white dark:bg-slate-900 w-full max-w-3xl max-h-[90vh] rounded-3xl shadow-2xl border border-gray-100 dark:border-slate-800 flex flex-col overflow-hidden transform transition-transform duration-300 scale-95 opacity-0" id="modalContainer">
             
             <div class="sticky top-0 z-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-6 py-4 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between gap-3">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center flex-wrap gap-2">
                     <span id="modalCategory" class="bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-extrabold text-[11px] uppercase tracking-wider px-3 py-1 rounded-full">
                         PEMERINTAHAN
                     </span>
                     <span class="text-slate-300 dark:text-slate-700">•</span>
                     <span id="modalReadTime" class="text-xs text-slate-500 dark:text-slate-400 font-medium">4 menit baca</span>
+                    <span class="text-slate-300 dark:text-slate-700">•</span>
+                    <span class="text-xs font-bold text-blue-700 dark:text-blue-400 flex items-center gap-1">
+                        <i class="far fa-eye"></i> <span id="modalViewCount">0</span> kali dibaca
+                    </span>
                 </div>
 
                 <div class="flex items-center gap-1.5 sm:gap-2">
@@ -247,6 +280,17 @@
                 </div>
 
                 <div id="modalBody" class="prose dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-base md:text-lg leading-relaxed space-y-4">
+                </div>
+
+                <!-- SLOT IKLAN 3: IN-ARTICLE ADSENSE (CPM TERTINGGI DI DALAM ARTIKEL) -->
+                <div class="my-6 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-dashed border-slate-200 dark:border-slate-700 text-center">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Advertisement</span>
+                    <ins class="adsbygoogle"
+                         style="display:block; text-align:center;"
+                         data-ad-layout="in-article"
+                         data-ad-format="fluid"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="3333333333"></ins>
                 </div>
 
                 <!-- BAGIAN BERITA TERKAIT LAINNYA DI BAWAH ARTIKEL -->
@@ -387,13 +431,29 @@
         </div>
     </footer>
 
-    <!-- SCRIPT LOGIC FILTER KATEGORI, SEARCH, SANITY FETCH & AUTO 1-10 KOMENTAR POSITIF -->
+    <!-- SCRIPT LOGIC: VIEW COUNTER HARIAN, ADSENSE TRIGGER, SANITY FETCH & 1-10 KOMENTAR POSITIF -->
     <script>
       const PROJECT_ID = 'z0v67ol7';
       const DATASET = 'production';
       let articlesData = [];
       let activeCategory = 'Semua';
       let currentFontSize = 16;
+      const sessionClicks = {};
+
+      // Fungsi inisialisasi slot iklan Google AdSense secara aman
+      function triggerAdSenseSlots() {
+        try {
+          if (window.adsbygoogle && Array.isArray(window.adsbygoogle)) {
+            document.querySelectorAll('ins.adsbygoogle').forEach((ad) => {
+              if (!ad.getAttribute('data-adsbygoogle-status')) {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+              }
+            });
+          }
+        } catch (e) {
+          // Abaikan jika script AdSense belum diaktifkan
+        }
+      }
 
       // Fungsi keamanan Escape HTML agar komentar tidak pernah merusak struktur halaman
       function escapeHTML(str) {
@@ -421,6 +481,47 @@
           month: 'long',
           year: 'numeric'
         });
+      }
+
+      function hashArticleId(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+          hash = ((hash << 5) - hash) + str.charCodeAt(i);
+          hash |= 0;
+        }
+        return Math.abs(hash);
+      }
+
+      // =========================================================================
+      // GENERATOR JUMLAH VIEW BERITA ACAM & BERTAMBAH OTOMATIS SETIAP HARI
+      // =========================================================================
+      function getArticleViews(article) {
+        const id = article._id || article.title || 'riauvibe';
+        const seed = hashArticleId(id);
+
+        // 1. Jumlah view awal acak unik per artikel (185 - 640 views)
+        const baseViews = 185 + (seed % 456);
+
+        // 2. Hitung jumlah hari berlalu sejak artikel diterbitkan
+        const pubDate = article.publishedAt && !isNaN(new Date(article.publishedAt).getTime())
+          ? new Date(article.publishedAt)
+          : new Date();
+        const now = new Date();
+        const diffMs = Math.max(0, now.getTime() - pubDate.getTime());
+        const daysElapsed = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+        // 3. Pertambahan harian acak per artikel (48 - 135 views/hari) + progres jam hari ini
+        const dailyGrowthRate = 48 + (seed % 88);
+        const hourlyProgress = Math.floor((now.getHours() / 24) * dailyGrowthRate);
+
+        // 4. Tambahkan klik sesi pembaca saat ini
+        const extraClick = sessionClicks[id] || 0;
+
+        return baseViews + (daysElapsed * dailyGrowthRate) + hourlyProgress + extraClick;
+      }
+
+      function formatViewsNumber(num) {
+        return num.toLocaleString('id-ID');
       }
 
       // 24 Profil Pembaca Lokal Riau & Kepri untuk Auto-Komentar Positif (1-10 Komentar)
@@ -475,19 +576,10 @@
         "Mantap jiwa! Terus menjadi media lokal kebanggaan Riau dan Kepulauan Riau."
       ];
 
-      function hashArticleId(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-          hash = ((hash << 5) - hash) + str.charCodeAt(i);
-          hash |= 0;
-        }
-        return Math.abs(hash);
-      }
-
       // Menghasilkan Jumlah Acak 1 hingga 10 Komentar Positif per Artikel
       function getRandomPositiveComments(article) {
         const seed = hashArticleId(article._id || article.title || 'riauvibe');
-        const targetCount = (seed % 10) + 1; // Jumlah komentar bervariasi: 1 s.d. 10 komentar per artikel
+        const targetCount = (seed % 10) + 1;
         const baseDate = article.publishedAt && !isNaN(new Date(article.publishedAt).getTime())
           ? new Date(article.publishedAt)
           : new Date();
@@ -496,7 +588,6 @@
         const usedReaderIdx = new Set();
         const usedTextIdx = new Set();
 
-        // Jika berita baru sudah memiliki komentar kontekstual dari Sanity, masukkan lebih dulu
         if (Array.isArray(article.comments) && article.comments.length > 0) {
           article.comments.forEach((c, idx) => {
             if (results.length >= targetCount) return;
@@ -514,7 +605,6 @@
           });
         }
 
-        // Lengkapi sisa komentar hingga mencapai targetCount (antara 1 sampai 10)
         let step = results.length;
         while (results.length < targetCount) {
           let rIdx = (seed + step * 7) % AUTO_READERS.length;
@@ -612,18 +702,27 @@
           renderArticles();
 
           if (popularContainer) {
-            popularContainer.innerHTML = articlesData.slice(0, 3).map((item, idx) => `
-              <div onclick="openModalById('${item._id}')" class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0 cursor-pointer group">
-                <span class="text-lg font-extrabold text-blue-900 dark:text-blue-400 w-5 text-center flex-shrink-0">${idx + 1}</span>
-                <div>
-                  <h5 class="text-xs font-bold text-gray-800 dark:text-gray-200 line-clamp-2 group-hover:text-blue-600">
-                    ${escapeHTML(item.title)}
-                  </h5>
-                  <span class="text-[10px] text-gray-400">${formatSafeDate(item.publishedAt, { day: 'numeric', month: 'short' })}</span>
+            popularContainer.innerHTML = articlesData.slice(0, 3).map((item, idx) => {
+              const views = formatViewsNumber(getArticleViews(item));
+              return `
+                <div onclick="openModalById('${item._id}')" class="flex items-start gap-3 border-b border-gray-100 dark:border-slate-800 pb-2.5 last:border-0 cursor-pointer group">
+                  <span class="text-lg font-extrabold text-blue-900 dark:text-blue-400 w-5 text-center flex-shrink-0">${idx + 1}</span>
+                  <div>
+                    <h5 class="text-xs font-bold text-gray-800 dark:text-gray-200 line-clamp-2 group-hover:text-blue-600">
+                      ${escapeHTML(item.title)}
+                    </h5>
+                    <div class="flex items-center gap-2 text-[10px] text-gray-400 mt-0.5">
+                      <span>${formatSafeDate(item.publishedAt, { day: 'numeric', month: 'short' })}</span>
+                      <span>•</span>
+                      <span><i class="far fa-eye"></i> ${views}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            `).join('');
+              `;
+            }).join('');
           }
+
+          triggerAdSenseSlots();
         } catch (error) {
           console.error("Gagal memuat berita Sanity:", error);
           if (badge) badge.innerText = "Offline";
@@ -665,7 +764,7 @@
           <div class="bg-gradient-to-r from-slate-100 to-blue-50 dark:from-slate-800/80 dark:to-slate-900 p-4 rounded-2xl border border-blue-200 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-4 my-1">
             <div class="w-full sm:w-48 h-28 bg-blue-900 text-white rounded-xl flex flex-col items-center justify-center p-3 text-center flex-shrink-0">
               <i class="fas fa-bullhorn text-2xl mb-1 text-amber-400"></i>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-blue-200">Iklan Native</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-blue-200">Advertisement</span>
             </div>
             <div class="flex-grow text-left">
               <span class="bg-amber-400 text-slate-900 font-extrabold text-[9px] px-2 py-0.5 rounded uppercase">Rekomendasi</span>
@@ -680,6 +779,7 @@
 
         let feedContent = '';
         filtered.forEach((item, index) => {
+          const views = formatViewsNumber(getArticleViews(item));
           feedContent += `
             <article onclick="openModalById('${item._id}')" class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm hover:shadow-md transition-all cursor-pointer group">
               <div class="w-full sm:w-48 h-36 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800">
@@ -701,7 +801,10 @@
                   </h4>
                 </div>
                 <div class="flex items-center justify-between text-xs text-gray-400 mt-3 pt-2 border-t border-gray-100 dark:border-slate-800">
-                  <span><i class="far fa-clock mr-1"></i> ${formatSafeDate(item.publishedAt)}</span>
+                  <div class="flex items-center gap-3">
+                    <span><i class="far fa-clock mr-1"></i> ${formatSafeDate(item.publishedAt)}</span>
+                    <span class="text-slate-500 dark:text-slate-400 font-medium"><i class="far fa-eye mr-1"></i> ${views}</span>
+                  </div>
                   <span class="text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1">Baca Berita <i class="fas fa-expand text-[10px]"></i></span>
                 </div>
               </div>
@@ -747,8 +850,14 @@
         const article = articlesData.find(a => a._id === id);
         if (!article) return;
 
+        // Tambah +1 view saat artikel dibuka pembaca & perbarui tampilan daftar
+        sessionClicks[id] = (sessionClicks[id] || 0) + 1;
+        const currentViews = formatViewsNumber(getArticleViews(article));
+        renderArticles();
+
         document.getElementById('modalCategory').innerText = article.category || 'PEMERINTAHAN';
         document.getElementById('modalTitle').innerText = article.title;
+        document.getElementById('modalViewCount').innerText = currentViews;
         document.getElementById('captionText').innerText = `Dokumentasi Liputan RiauVibe - ${article.title}`;
 
         if (article.imageUrl) {
@@ -792,7 +901,10 @@
                     <h4 class="text-white text-xs font-semibold mt-1 line-clamp-2 group-hover:text-blue-300 transition-colors">
                         ${escapeHTML(rel.title)}
                     </h4>
-                    <p class="text-[10px] text-slate-400 mt-2">${formatSafeDate(rel.publishedAt, { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mt-2">
+                      <span>${formatSafeDate(rel.publishedAt, { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                      <span><i class="far fa-eye"></i> ${formatViewsNumber(getArticleViews(rel))}</span>
+                    </div>
                 </div>
             `).join('');
         } else {
@@ -810,6 +922,7 @@
         setTimeout(() => {
           container.classList.remove('scale-95', 'opacity-0');
           container.classList.add('scale-100', 'opacity-100');
+          triggerAdSenseSlots();
         }, 10);
       }
 
